@@ -3,7 +3,7 @@ Name: HalFiPad
 Depends: mobilesubstrate
 Version: 3.3.8
 Architecture: iphoneos-arm
-Description: iPhone 11 features, iPad features, many unique features but lightweight & less battery drain.
+Description: iPhone 11 features, iPad features, many unique features but lightweight and less battery drain.
 Maintainer: Hius
 Author: Hius
 Section: Tweaks

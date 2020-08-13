@@ -28,4 +28,9 @@ iPhone 11 features, iPad features, many unique features but lightweight and less
 Install [Theos](https://github.com/theos/theos)
 > make do
 # Author
-Hiếu Vũ.
+HalFiPad is a fork by Hiếu Vũ.
+# Credit
+* Ryannair05  [Little11](https://github.com/ryannair05/Little11)
+* SniperGER  [ProundLock2](https://github.com/SniperGER/ProudLock2)
+* VitaTaf  [HomeGesture](https://github.com/VitaTaf/HomeGesture)
+* duraidabdul  [Neptune](https://github.com/duraidabdul/Neptune)

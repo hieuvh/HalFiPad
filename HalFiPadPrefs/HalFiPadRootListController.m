@@ -53,9 +53,6 @@
 - (void)openTwitter:(id)arg1 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/helios017"] options:@{} completionHandler:nil];
 }
-- (void)openPayPal:(id)arg1 {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://paypal.me/hius017"] options:@{} completionHandler:nil];
-}
 
 - (id)readPreferenceValue:(PSSpecifier*)specifier {
     NSString *path = [NSString stringWithFormat:@"/User/Library/Preferences/%@.plist", specifier.properties[@"defaults"]];

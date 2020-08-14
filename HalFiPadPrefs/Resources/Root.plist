@@ -16,16 +16,6 @@
 		</dict>
 		<dict>
 			<key>label</key>
-			<string>Donation ❤</string>
-			<key>cell</key>
-			<string>PSButtonCell</string>
-			<key>action</key>
-			<string>openPayPal:</string>
-			<key>icon</key>
-			<string>donation.png</string>
-		</dict>
-		<dict>
-			<key>label</key>
 			<string>▼ Gestures Style</string>
 			<key>cell</key>
 			<string>PSGroupCell</string>
@@ -57,8 +47,8 @@
 				<string>Original</string>
 				<string>Disabled</string>
 				<string>Modern</string>
-				<string>_Left</string>
-				<string>Right_</string>
+				<string>Left_</string>
+				<string>_Right</string>
 				<string>Miniature</string>
 			</array>
 			<key>PostNotification</key>
@@ -98,7 +88,7 @@
 		</dict>
 		<dict>
 			<key>label</key>
-			<string>✯ General options</string>
+			<string>✯ General</string>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 		</dict>
@@ -138,7 +128,7 @@
 					<key>label</key>
 					<string>+ Dynamic Color</string>
 					<key>key</key>
-					<string>dynamicColorBatt</string>
+					<string>dynamicColorBP</string>
 					<key>defaults</key>
 					<string>com.hius.HalFiPadPrefs</string>
 					<key>default</key>
@@ -152,7 +142,7 @@
 					<key>label</key>
 					<string>- Static Color</string>
 					<key>key</key>
-					<string>staticColor</string>
+					<string>staticColorBP</string>
 					<key>defaults</key>
 					<string>com.hius.HalFiPadPrefs</string>
 					<key>default</key>
@@ -265,7 +255,7 @@
 					<key>defaults</key>
 					<string>com.hius.HalFiPadPrefs</string>
 					<key>key</key>
-					<string>appDockRounded</string>
+					<string>appDockRound</string>
 					<key>PostNotification</key>
 					<string>com.hius.HalFiPadPrefs.settingschanged</string>
 				</dict>
@@ -293,7 +283,7 @@
 					<key>defaults</key>
 					<string>com.hius.HalFiPadPrefs</string>
 					<key>key</key>
-					<string>screenRounded</string>
+					<string>screenRound</string>
 					<key>PostNotification</key>
 					<string>com.hius.HalFiPadPrefs.settingschanged</string>
 				</dict>
@@ -382,7 +372,7 @@
 					<key>key</key>
 					<string>homeBarWidth</string>
 					<key>max</key>
-					<integer>300</integer>
+					<integer>350</integer>
 					<key>min</key>
 					<integer>10</integer>
 					<key>showValue</key>
@@ -406,7 +396,7 @@
 						<key>key</key>
 						<string>homeBarHeight</string>
 						<key>max</key>
-						<integer>100</integer>
+						<integer>20</integer>
 						<key>min</key>
 						<integer>1</integer>
 						<key>showValue</key>
@@ -478,9 +468,9 @@
 			<key>cell</key>
 			<string>PSSwitchCell</string>
 			<key>label</key>
-			<string>◦ Combination [Power + Volume Up]</string>
+			<string>◦ Combina Buttons iPX</string>
 			<key>key</key>
-			<string>xCombination</string>
+			<string>ipxCombination</string>
 			<key>defaults</key>
 			<string>com.hius.HalFiPadPrefs</string>
 			<key>default</key>
@@ -522,7 +512,7 @@
 			<key>label</key>
 			<string>◦ No Breadcrumbs</string>
 			<key>key</key>
-			<string>noBreadcrumbs</string>
+			<string>noBreadcrumb</string>
 			<key>defaults</key>
 			<string>com.hius.HalFiPadPrefs</string>
 			<key>default</key>
@@ -579,7 +569,7 @@
 					<key>label</key>
 					<string>◦ Floating Gestures</string>
 					<key>key</key>
-					<string>floatingGestures</string>
+					<string>floatingGesture</string>
 					<key>defaults</key>
 					<string>com.hius.HalFiPadPrefs</string>
 					<key>default</key>
@@ -607,7 +597,7 @@
 					<key>label</key>
 					<string>◦ Split View - SlideOver</string>
 					<key>key</key>
-					<string>enablediPadMultitask</string>
+					<string>iPadMultitask</string>
 					<key>defaults</key>
 					<string>com.hius.HalFiPadPrefs</string>
 					<key>default</key>
@@ -671,7 +661,7 @@
 			<key>label</key>
 			<string>◦ Picture in Picture</string>
 			<key>key</key>
-			<string>pipEnable</string>
+			<string>pictureInPicture</string>
 			<key>defaults</key>
 			<string>com.hius.HalFiPadPrefs</string>
 			<key>default</key>
@@ -764,7 +754,7 @@
 			<key>label</key>
 			<string>◦ Camera UI 11 [beta]</string>
 			<key>key</key>
-			<string>newCamUI</string>
+			<string>cameraUI11</string>
 			<key>defaults</key>
 			<string>com.hius.HalFiPadPrefs</string>
 			<key>default</key>
@@ -778,7 +768,7 @@
 			<key>label</key>
 			<string>◦ Camera Zoom and Flips Control</string>
 			<key>key</key>
-			<string>camZoomFlip</string>
+			<string>cameraZoomFlip11</string>
 			<key>defaults</key>
 			<string>com.hius.HalFiPadPrefs</string>
 			<key>default</key>
@@ -890,7 +880,7 @@
 			<key>label</key>
 			<string>◦ Swipe To Screenshot</string>
 			<key>key</key>
-			<string>swipeShot</string>
+			<string>swipeScreenshot</string>
 			<key>defaults</key>
 			<string>com.hius.HalFiPadPrefs</string>
 			<key>default</key>
@@ -900,6 +890,6 @@
 		</dict>
 	</array>
 	<key>title</key>
-	<string>◦HalFiPad◦</string>
+	<string>HalFiPad</string>
 </dict>
 </plist>

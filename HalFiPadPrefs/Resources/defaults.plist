@@ -6,31 +6,31 @@
 	<integer>1</integer>
 	<key>statusBarMode</key>
 	<integer>4</integer>
-	<key>screenMode</key>
-	<integer>1</integer>
-    <key>pipEnabled</key>
-	<false/>
-    <key>recentApp</key>
-	<true/>
-    <key>enablediPadMultitask</key>
-	<false/>
 	<key>floatingDock</key>
 	<false/>
-    <key>newSwitcher</key>
+	<key>floatingGesture</key>
+	<true/>
+	<key>recentApp</key>
+	<true/>
+	<key>iPadMultitask</key>
 	<false/>
-	<key>floatingGestures</key>
+	<key>screenMode</key>
+	<integer>1</integer>
+	<key>pictureInPicture</key>
+	<false/>
+	<key>newSwitcher</key>
+	<false/>
+	<key>batteryPercent</key>
 	<true/>
-    <key>batteryPercent</key>
-	<true/>
-	<key>staticColor</key>
+	<key>dynamicColorBP</key>
+	<false/>
+	<key>staticColorBP</key>
 	<false/>
 	<key>hideChargingIndicator</key>
 	<false/>
 	<key>hideStockPercent</key>
 	<true/>
 	<key>stockPercentCharging</key>
-	<false/>
-	<key>dynamicColorBatt</key>
 	<false/>
 	<key>ccStatusBar</key>
 	<true/>
@@ -52,43 +52,43 @@
 	<integer>3</integer>
 	<key>lsShortcuts</key>
 	<true/>
-    <key>xCombination</key>
+	<key>ipxCombination</key>
 	<true/>
-    <key>noBreadcrumbs</key>
+	<key>noBreadcrumb</key>
 	<true/>
 	<key>noReachability</key>
 	<true/>
-    <key>bottomInset</key>
+	<key>bottomInset</key>
 	<integer>0</integer>
-	<key>screenRounded</key>
+	<key>screenRound</key>
 	<integer>0</integer>
-	<key>appDockRounded</key>
+	<key>appDockRound</key>
 	<integer>6</integer>
-    <key>nonLatinKeyboard</key>
+	<key>nonLatinKeyboard</key>
 	<false/>
 	<key>noSwipeKeyboard</key>
 	<false/>
-    <key>highKeyboard</key>
+	<key>highKeyboard</key>
 	<true/>
 	<key>darkKeyboard</key>
 	<false/>
 	<key>makeClean</key>
 	<false/>
-    <key>moreIconDock</key>
+	<key>moreIconDock</key>
 	<true/>
-    <key>noDockBackground</key>
+	<key>noDockBackground</key>
 	<false/>
 	<key>noIconsFly</key>
 	<true/>
 	<key>fastOpenApp</key>
 	<false/>
-	<key>newCamUI</key>
+	<key>cameraUI11</key>
 	<false/>
-	<key>camZoomFlip</key>
+	<key>cameraZoomFlip11</key>
 	<true/>
-    <key>swipeShot</key>
+	<key>swipeScreenshot</key>
 	<true/>
-    <key>landscapeLock</key>
+	<key>landscapeLock</key>
 	<false/>
 	<key>reduceRows</key>
 	<false/>

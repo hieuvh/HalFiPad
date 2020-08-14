@@ -1,6 +1,5 @@
 #import <UIKit/UIKit.h>
 
-#define k(key) CFEqual(string, CFSTR(key))
 #define CGRectSetY(rect, y) CGRectMake(rect.origin.x, y, rect.size.width, rect.size.height)
 #define pREFS [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.hius.HalFiPadPrefs.plist"]
 #define pATH @"/User/Library/Preferences/com.hius.HalFiPadPrefs.plist"
@@ -24,61 +23,61 @@ typedef struct SBIconCoordinate {
 @property (nonatomic, retain) UIControl *cameraButton;
 @end
 
-static double ScreenRounded;
-static CGFloat AppDockRounded;
-NSInteger BottomInset;
+NSInteger screenRound;
+NSInteger appDockRound;
+NSInteger bottomInset;
 
-static int StatusBarMode;
-static int GesturesMode;
-static int ScreenMode;
+static int statusBarMode;
+static int gesturesMode;
+static int screenMode;
 
-static int HomeBarWidth = 134;
-static int HomeBarHeight = 5;
-static int HomeBarRadius = 3;
+static int HomeBarWidth;
+static int HomeBarHeight;
+static int HomeBarRadius;
 
 //iPad features
-BOOL FloatingDockEnabled;
-BOOL FloatingGesturesEnabled;
-BOOL RecentEnabled;
-BOOL iPadMultitaskEnabled;
-BOOL PIPEnabled;
-BOOL NewGridSwitcherEnabled;
+BOOL isFloatingDock;
+BOOL isFloatingGesture;
+BOOL isRecentApp;
+BOOL isiPadMultitask;
+BOOL isPIP;
+BOOL isNewGridSwitcher;
 //General
-BOOL HomeBarAutoHideEnabled;
-BOOL HomeBarSBEnabled;
-BOOL HomeBarLSEnabled;
-BOOL HomeBarCustomEnabled;
-BOOL CCStatusbarEnabled;
-BOOL CCGrabberEnabled;
-BOOL ReachabilityEnabled;
-BOOL ShortcutsEnabled;
-BOOL NoDockBackgroudEnabled;
-BOOL NoBreadcrumbsEnabled;
-BOOL XCombinationEnabled;
-//Battery Custom
-BOOL BatteryPercentEnabled;
-BOOL DynamicColorBP;
-BOOL StaticColor;
-BOOL HideChargingIndicator;
-BOOL HideStockPercentage;
-BOOL StockPercentCharging;
+BOOL isHomeBarAutoHide;
+BOOL isHomeBarSB;
+BOOL isHomeBarLS;
+BOOL isHomeBarCustom;
+BOOL isCCStatusbar;
+BOOL isCCGrabber;
+BOOL isReachability;
+BOOL isLSShortcuts;
+BOOL isNoDockBackgroud;
+BOOL isNoBreadcrumbs;
+BOOL isiPXCombination;
+//Battery Percent - BP
+BOOL isBatteryPercent;
+BOOL isDynamicColorBP;
+BOOL isStaticColorBP;
+BOOL isHideChargingIndicator;
+BOOL isHideStockPercent;
+BOOL isStockPercentCharging;
 //Keyboard options
-BOOL HigherKeyboardEnabled;
-BOOL NoSwipeKBEnabled;
-BOOL DarkKeyBoardEnabled;
-BOOL NoGesturesKeyboard;
-BOOL NonLatinEnabled;
+BOOL isHigherKeyboard;
+BOOL isNoSwipeKeyboard;
+BOOL isDarkKeyboard;
+BOOL isNoGesturesKeyboard;
+BOOL isNonLatinKeyboard;
 //More options
-BOOL Cam11Enabled;
-BOOL CamZoomFlipEnabled;
-BOOL FastOpenEnabled;
-BOOL NoIconsFlyEnabled;
-BOOL LandscapeLockEnabled;
-BOOL MakeCleanEnabled;
-BOOL MoreIconDockEnabled;
-BOOL ReduceRowsEnabled;
-BOOL SwipeShotEnabled;
-BOOL PadLockEnabled;
+BOOL isCameraUI11;
+BOOL isCameraZoomFlip11;
+BOOL isFastOpenApp;
+BOOL isNoIconsFly;
+BOOL isLandscapeLock;
+BOOL isMakeClean;
+BOOL isMoreIconDock;
+BOOL isReduceRows;
+BOOL isSwipeScreenshot;
+BOOL isPadLock;
 
 //Handle Preferences:
 static BOOL boolValueForKey(NSString *key) {
@@ -94,66 +93,66 @@ static void updatePrefs() {
     if (![fileManager fileExistsAtPath:pATH]) {
        [fileManager copyItemAtPath:pATH_deFAULT toPath:pATH error:nil];
     }
-    GesturesMode = intValueForKey(@"gesturesMode");
-    StatusBarMode = intValueForKey(@"statusBarMode");
-    ScreenRounded = intValueForKey(@"screenRounded");
-    AppDockRounded = intValueForKey(@"appDockRounded");
-    BottomInset = intValueForKey(@"bottomInset");
-    ScreenMode = intValueForKey(@"screenMode");
+    gesturesMode = intValueForKey(@"gesturesMode");
+    statusBarMode = intValueForKey(@"statusBarMode");
+    screenRound = intValueForKey(@"screenRound");
+    appDockRound = intValueForKey(@"appDockRound");
+    bottomInset = intValueForKey(@"bottomInset");
+    screenMode = intValueForKey(@"screenMode");
     HomeBarWidth = intValueForKey(@"homeBarWidth");
     HomeBarHeight = intValueForKey(@"homeBarHeight");
     HomeBarRadius = intValueForKey(@"homeBarRadius");
     //iPad features:
-    FloatingDockEnabled = boolValueForKey(@"floatingDock");
-    iPadMultitaskEnabled = boolValueForKey(@"enablediPadMultitask");
-    RecentEnabled = boolValueForKey(@"recentApp");
-    NewGridSwitcherEnabled = boolValueForKey(@"newSwitcher");
-    PIPEnabled = boolValueForKey(@"pipEnable");
-    FloatingGesturesEnabled = boolValueForKey(@"floatingGestures");
+    isFloatingDock = boolValueForKey(@"floatingDock");
+    isiPadMultitask = boolValueForKey(@"iPadMultitask");
+    isRecentApp = boolValueForKey(@"recentApp");
+    isNewGridSwitcher = boolValueForKey(@"newSwitcher");
+    isPIP = boolValueForKey(@"pictureInPicture");
+    isFloatingGesture = boolValueForKey(@"floatingGesture");
     //General options:
-    CCStatusbarEnabled = boolValueForKey(@"ccStatusBar");
-    CCGrabberEnabled = boolValueForKey(@"ccGrabber");
+    isCCStatusbar = boolValueForKey(@"ccStatusBar");
+    isCCGrabber = boolValueForKey(@"ccGrabber");
     //HomeBar
-    HomeBarAutoHideEnabled = boolValueForKey(@"homeBarAutoHide");
-    HomeBarSBEnabled = boolValueForKey(@"homeBarSB");
-    HomeBarLSEnabled = boolValueForKey(@"homeBarLS");
-    HomeBarCustomEnabled = boolValueForKey(@"homeBarCustom");
-    ShortcutsEnabled = boolValueForKey(@"lsShortcuts");
-    NoBreadcrumbsEnabled = boolValueForKey(@"noBreadcrumbs");
-    ReachabilityEnabled = boolValueForKey(@"noReachability");
-    XCombinationEnabled = boolValueForKey(@"xCombination");
+    isHomeBarAutoHide = boolValueForKey(@"homeBarAutoHide");
+    isHomeBarSB = boolValueForKey(@"homeBarSB");
+    isHomeBarLS = boolValueForKey(@"homeBarLS");
+    isHomeBarCustom = boolValueForKey(@"homeBarCustom");
+    isLSShortcuts = boolValueForKey(@"lsShortcuts");
+    isNoBreadcrumbs = boolValueForKey(@"noBreadcrumb");
+    isReachability = boolValueForKey(@"noReachability");
+    isiPXCombination = boolValueForKey(@"ipxCombination");
     //Battery Customization:
-    BatteryPercentEnabled = boolValueForKey(@"batteryPercent");
-    StaticColor = boolValueForKey(@"staticColor");
-    HideChargingIndicator = boolValueForKey(@"hideChargingIndicator");
-    HideStockPercentage = boolValueForKey(@"hideStockPercent");
-    StockPercentCharging = boolValueForKey(@"stockPercentCharging");
-    DynamicColorBP = boolValueForKey(@"dynamicColorBatt");
+    isBatteryPercent = boolValueForKey(@"batteryPercent");
+    isDynamicColorBP = boolValueForKey(@"dynamicColorBP");
+    isStaticColorBP = boolValueForKey(@"staticColorBP");
+    isHideChargingIndicator = boolValueForKey(@"hideChargingIndicator");
+    isHideStockPercent = boolValueForKey(@"hideStockPercent");
+    isStockPercentCharging = boolValueForKey(@"stockPercentCharging");
     //Keyboard options:
-    HigherKeyboardEnabled = boolValueForKey(@"highKeyboard");
-    DarkKeyBoardEnabled = boolValueForKey(@"darkKeyboard");
-    NoSwipeKBEnabled = boolValueForKey(@"noSwipeKeyboard");
-    NonLatinEnabled = boolValueForKey(@"nonLatinKeyboard");
+    isHigherKeyboard = boolValueForKey(@"highKeyboard");
+    isDarkKeyboard = boolValueForKey(@"darkKeyboard");
+    isNoSwipeKeyboard = boolValueForKey(@"noSwipeKeyboard");
+    isNonLatinKeyboard = boolValueForKey(@"nonLatinKeyboard");
     // More options:
-    MakeCleanEnabled = boolValueForKey(@"makeClean");
-    MoreIconDockEnabled = boolValueForKey(@"moreIconDock");
-    NoDockBackgroudEnabled = boolValueForKey(@"noDockBackground");
-    NoIconsFlyEnabled = boolValueForKey(@"noIconsFly");
-    FastOpenEnabled = boolValueForKey(@"fastOpenApp");
-    Cam11Enabled = boolValueForKey(@"newCamUI");
-    CamZoomFlipEnabled = boolValueForKey(@"camZoomFlip");
-    SwipeShotEnabled = boolValueForKey(@"swipeShot");
-    LandscapeLockEnabled = boolValueForKey(@"landscapeLock");
-    ReduceRowsEnabled = boolValueForKey(@"reduceRows");
-    PadLockEnabled = boolValueForKey(@"padLock");
+    isMakeClean = boolValueForKey(@"makeClean");
+    isMoreIconDock = boolValueForKey(@"moreIconDock");
+    isNoDockBackgroud = boolValueForKey(@"noDockBackground");
+    isNoIconsFly = boolValueForKey(@"noIconsFly");
+    isFastOpenApp = boolValueForKey(@"fastOpenApp");
+    isCameraUI11 = boolValueForKey(@"cameraUI11");
+    isCameraZoomFlip11 = boolValueForKey(@"cameraZoomFlip11");
+    isSwipeScreenshot = boolValueForKey(@"swipeScreenshot");
+    isLandscapeLock = boolValueForKey(@"landscapeLock");
+    isReduceRows = boolValueForKey(@"reduceRows");
+    isPadLock = boolValueForKey(@"padLock");
     //Per-App Customize
     NSString const *mainAppID = [NSBundle mainBundle].bundleIdentifier;
     NSDictionary const *appCustomize = [pREFS objectForKey:mainAppID];
     if (appCustomize) {
-        ScreenMode = (NSInteger)[[appCustomize objectForKey:@"screenMode"]?:((NSNumber *)[NSNumber numberWithBool:ScreenMode]) integerValue];
-        BottomInset = (NSInteger)[[appCustomize objectForKey:@"bottomInset"]?:((NSNumber *)[NSNumber numberWithBool:BottomInset]) integerValue];
-        DarkKeyBoardEnabled = (BOOL)[[appCustomize objectForKey:@"darkKeyboard"]?:((NSNumber *)[NSNumber numberWithBool:DarkKeyBoardEnabled]) boolValue];
-        HigherKeyboardEnabled = (BOOL)[[appCustomize objectForKey:@"highKeyboard"]?:((NSNumber *)[NSNumber numberWithBool:HigherKeyboardEnabled]) boolValue];
-        NonLatinEnabled = (BOOL)[[appCustomize objectForKey:@"nonLatinKeyboard"]?:((NSNumber *)[NSNumber numberWithBool:NonLatinEnabled]) boolValue];
+        screenMode = (NSInteger)[[appCustomize objectForKey:@"screenMode"]?:((NSNumber *)[NSNumber numberWithBool:screenMode]) integerValue];
+        bottomInset = (NSInteger)[[appCustomize objectForKey:@"bottomInset"]?:((NSNumber *)[NSNumber numberWithBool:bottomInset]) integerValue];
+        isDarkKeyboard = (BOOL)[[appCustomize objectForKey:@"darkKeyboard"]?:((NSNumber *)[NSNumber numberWithBool:isDarkKeyboard]) boolValue];
+        isHigherKeyboard = (BOOL)[[appCustomize objectForKey:@"highKeyboard"]?:((NSNumber *)[NSNumber numberWithBool:isHigherKeyboard]) boolValue];
+        isNonLatinKeyboard = (BOOL)[[appCustomize objectForKey:@"nonLatinKeyboard"]?:((NSNumber *)[NSNumber numberWithBool:isNonLatinKeyboard]) boolValue];
     }
 }

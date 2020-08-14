@@ -1,4 +1,4 @@
-include $(THEOS)/makefiles/common.mk -j2
+include $(THEOS)/makefiles/common.mk
 
 ARCHS = arm64 arm64e
 

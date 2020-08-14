@@ -1,9 +1,10 @@
 Package: com.hius.halfipad
 Name: HalFiPad
-Depends: mobilesubstrate
-Version: 3.3.8
+Depends: mobilesubstrate, preferenceloader
+Version: 3.3.9
 Architecture: iphoneos-arm
 Description: iPhone 11 features, iPad features, many unique features but lightweight and less battery drain.
 Maintainer: Hius
 Author: Hius
 Section: Tweaks
+Replaces: com.binksalex.fluidify, com.VitaTaf.HomeGesture, com.ioscreatix.littlex, com.ryannair05.little11

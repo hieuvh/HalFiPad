@@ -32,11 +32,15 @@
 	<true/>
 	<key>stockPercentCharging</key>
 	<false/>
+	<key>ccAnimation</key>
+	<true/>
 	<key>ccStatusBar</key>
 	<true/>
 	<key>ccGrabber</key>
 	<false/>
 	<key>homeBarAutoHide</key>
+	<false/>
+	<key>edgeProtect</key>
 	<false/>
 	<key>homeBarSB</key>
 	<false/>
@@ -62,7 +66,7 @@
 	<integer>0</integer>
 	<key>screenRound</key>
 	<integer>0</integer>
-	<key>appDockRound</key>
+	<key>roundAppDock</key>
 	<integer>6</integer>
 	<key>nonLatinKeyboard</key>
 	<false/>
@@ -70,9 +74,13 @@
 	<false/>
 	<key>highKeyboard</key>
 	<true/>
+	<key>bottomHeightKB</key>
+	<integer>48</integer>
+	<key>boundKeyboard</key>
+	<integer>-15</integer>
 	<key>darkKeyboard</key>
 	<false/>
-	<key>makeClean</key>
+	<key>makeSBClean</key>
 	<false/>
 	<key>moreIconDock</key>
 	<true/>
@@ -81,6 +89,8 @@
 	<key>noIconsFly</key>
 	<true/>
 	<key>fastOpenApp</key>
+	<false/>
+	<key>cameraBottomSet</key>
 	<false/>
 	<key>cameraUI11</key>
 	<false/>

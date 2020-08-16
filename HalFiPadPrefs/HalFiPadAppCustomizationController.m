@@ -1,4 +1,4 @@
-#include "AppCustomSpecifier.h"
+#include "HalFiPadSpecifier.h"
 
 @implementation HalFiPadAppCustomizationController
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {

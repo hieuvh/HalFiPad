@@ -9,15 +9,16 @@
 %end
 
 //Mini Gestures
-%group MiniatureGestures
-
+%group MiniatureGesture
 static BOOL nopas = YES;
-
 @interface CSPasscodeViewController
 -(void)passcodeLockViewCancelButtonPressed:(id)arg1 ;
 @end
 
 %hook CSPasscodeViewController
+-(void)viewWillAppear:(BOOL)arg1 {
+    %orig(NO);
+}
 -(void)viewDidAppear:(BOOL)arg1 {
     %orig(NO);
     if(nopas) {
@@ -70,14 +71,6 @@ static BOOL nopas = YES;
 }
 %end
 
-//Bottom Inset
-%hook UIWindow
-- (UIEdgeInsets)safeAreaInsets {
-    UIEdgeInsets const x = %orig;
-    return UIEdgeInsetsMake(x.top, x.left, bottomInset, x.right);
-}
-%end
-
 //Switch StatusBar
 %group SwitchStatusBar
 %hook _UIStatusBarVisualProvider_iOS
@@ -101,39 +94,6 @@ static BOOL nopas = YES;
     NSUInteger const rows = MSHookIvar<NSUInteger>(self, "_numberOfPortraitRows");
     if (rows==3) return %orig;
     return UIEdgeInsetsMake(x.top+10, x.left, x.bottom, x.right);
-}
-%end
-%end
-
-//Fix some app
-%group fixApp1 //1
-%hook TFNNavigationBarOverlayView //Fix Twitter
-- (void)setFrame:(CGRect)frame {
-    frame.size.height += 6;
-    %orig;
-}
-%end
-
-@interface YTHeaderContentComboView : UIView
-- (UIView*)headerView;
-@end
-
-%hook YTHeaderContentComboView //Fix Youtube
-- (void)layoutSubviews {
-    %orig;
-    CGRect headerViewFrame = [[self headerView] frame];
-    headerViewFrame.origin.y += 18;
-    [[self headerView] setFrame:headerViewFrame];
-    [self setBackgroundColor:[[self headerView] backgroundColor]];
-}
-%end
-%end
-
-//Fix for Tiktok, ViettelPay, Twitter, Instagram
-%group fixApp2
-%hook UIStatusBarManager
--(double)statusBarHeight {
-    return 20;
 }
 %end
 %end
@@ -230,8 +190,18 @@ static BOOL nopas = YES;
 //Fix CC Status Bar Overlay
 %hook CCUIModularControlCenterOverlayViewController
 - (void)setOverlayStatusBarHidden:(BOOL)arg1 {
-    if (statusBarMode == 0 || !isCCStatusbar) return;
+    if (!isCCStatusbar || statusBarMode == 0) return;
     %orig;
+}
+%end
+
+// CC StatusBar
+%hook CCUIModularControlCenterOverlayViewController
+- (void)dismissAnimated:(bool)arg1 withCompletionHandler:(id)arg2 {
+    if(!isCCAnimation) {
+        arg1 = 0;
+    }
+    %orig(arg1, arg2);
 }
 %end
 
@@ -245,37 +215,19 @@ static BOOL nopas = YES;
         else if (statusBarMode == 3)
             %orig(CGRectSetY(frame, 9));
         else if (statusBarMode == 0)
-            %orig(CGRectSetY(frame, -32));
+            %orig(CGRectSetY(frame, -33));
         else
             %orig(CGRectSetY(frame, -15));
     } else {
         if(statusBarMode == 2 || (screenRound > 15 && statusBarMode == 1))
             %orig(CGRectSetY(frame, -20));
         else if (statusBarMode == 0)
-            %orig(CGRectSetY(frame, -40));
+            %orig(CGRectSetY(frame, -42));
         else if (statusBarMode == 3)
             %orig;
         else
             %orig(CGRectSetY(frame, -24));
     }
-}
-%end
-%end
-
-//Fix Youtube
-%group FixYouTube
-%hook UIStatusBarManager
--(BOOL)isStatusBarHidden {
-    return YES;
-}
-%end
-
-%hook YTSearchView
-- (void)setFrame:(CGRect)frame {
-    if (statusBarMode == 3)
-        %orig(CGRectSetY(frame, frame.origin.y + 40));
-    else
-        %orig(CGRectSetY(frame, frame.origin.y + 20));
 }
 %end
 %end
@@ -479,13 +431,16 @@ int applicationDidFinishLaunching;
 %end
 %end
 
-//HomeBar Auto Hide
-%group HomeBarAutoHide
-%hook UIViewController
--(BOOL)prefersHomeIndicatorAutoHidden {
-    return YES;
+//Edge Protect
+%hook SBDeviceApplicationSceneHandle
+-(BOOL)isEdgeProtectEnabledForHomeGesture {
+    return isEdgeProtect;
 }
-%end
+
+//HomeBar Auto Hide
+-(BOOL)isAutoHideEnabledForHomeAffordance {
+    return isHomeBarAutoHide;
+}
 %end
 
 //No HomeBar LS
@@ -511,7 +466,7 @@ int applicationDidFinishLaunching;
 %end
 
 //No breadcum
-%group NoBreadcrumbs
+%group NoBreadcrumb
 %hook _UIStatusBarData
 -(void)setBackNavigationEntry:(id)arg1 {
     return;
@@ -523,29 +478,29 @@ int applicationDidFinishLaunching;
 %group HomeBarCustom
 %hook MTLumaDodgePillSettings
 -(void)setMinWidth:(double)arg1 {
-    arg1 = (int)HomeBarWidth;
+    arg1 = HomeBarWidth;
     %orig;
 }
 
 -(void)setMaxWidth:(double)arg1 {
-    arg1 = (int)HomeBarWidth;
+    arg1 = HomeBarWidth;
     %orig;
 }
 
 -(void)setCornerRadius:(double)arg1 {
-    arg1 = (int)HomeBarRadius;
+    arg1 = HomeBarRadius;
     %orig;
 }
 
 -(void)setHeight:(double)arg1 {
-    arg1 = (int)HomeBarHeight;
+    arg1 = HomeBarHeight;
     %orig;
 }
 %end
 %end
 
 //Round Dock/AppSwitcher
-%group AppDock
+%group RoundAppDock
 %hook UITraitCollection
 -(CGFloat)displayCornerRadius {
     return appDockRound;
@@ -554,7 +509,7 @@ int applicationDidFinishLaunching;
 %end
 
 //Rounded Screen Corner
-%group RoundCorners
+%group RoundCorner
 @interface _UIRootWindow : UIView
 @property (setter=_setContinuousCornerRadius:, nonatomic) double _continuousCornerRadius;
 @end
@@ -571,54 +526,6 @@ int applicationDidFinishLaunching;
 %hook SBReachabilityBackgroundView
 - (double)_displayCornerRadius {
     return screenRound;
-}
-%end
-%end
-
-//Dark Keyboard
-%group DarkKeyBoard
-%hook UIKBRenderConfig
-- (void)setLightKeyboard:(BOOL)arg1 {
-        %orig(NO);
-}
-%end
-%end
-
-//Default Keyboard
-%group DefaultKeyboard
-%hook UIKeyboardImpl
-+(UIEdgeInsets)deviceSpecificPaddingForInterfaceOrientation:(long long)arg1 inputMode:(id)arg2 {
-    UIEdgeInsets const orig = %orig;
-    if(!isNonLatinKeyboard) return UIEdgeInsetsMake(orig.top, 0, 0, 0);
-    return UIEdgeInsetsMake(orig.top, orig.left, 0, orig.right);
-}
-%end
-%end
-
-//Higher Keyboard X
-%group HigherKeyboard
-%hook UIKeyboardImpl
-+(UIEdgeInsets)deviceSpecificPaddingForInterfaceOrientation:(long long)arg1 inputMode:(id)arg2 {
-	UIEdgeInsets orig = %orig;
-    orig.bottom = 48;
-	if(!isNonLatinKeyboard){
-        if (orig.left == 75) {
-            orig.left = 0;
-            orig.right = 0;
-	    }
-    }
-	return orig;
-}
-%end
-
-%hook UIKeyboardDockView
-- (CGRect)bounds {
-    CGRect bounds = %orig;
-    if (bounds.origin.y == 0) {
-        NSClassFromString(@"BarmojiCollectionView");
-        bounds.origin.y -= 12;
-    }
-    return bounds;
 }
 %end
 %end
@@ -689,19 +596,19 @@ void resetTouch(SBHomeGesturePanGestureRecognizer *self, NSSet *touches, id even
 @end
 
 %hook SBPlatformController
-- (long long)medusaCapabilities {
+-(NSInteger)medusaCapabilities {
     return 2;
 }
 %end
 
 %hook SBMainWorkspace
-- (BOOL)isMedusaEnabled {
+-(BOOL)isMedusaEnabled {
     return YES;
 }
 %end
 
 %hook SBApplication
-- (BOOL)isMedusaCapable {
+-(BOOL)isMedusaCapable {
     //Fix app only landscape
     NSString *pathURL = [self.info.executableURL.path stringByDeletingLastPathComponent];
     NSMutableDictionary *infoDict = [NSMutableDictionary dictionaryWithContentsOfFile:[pathURL stringByAppendingString:@"/Info.plist"]];
@@ -711,74 +618,17 @@ void resetTouch(SBHomeGesturePanGestureRecognizer *self, NSSet *touches, id even
     }
     return YES;
 }
-
 -(BOOL)mainSceneWantsFullscreen {
-    if (screenMode == 1) return YES;
-    return %orig;
-}
-%end
-%end
-
-//Landscape Mode
-%group iPadAppStyle
-%hook UITraitCollection
-+(id)traitCollectionWithHorizontalSizeClass:(long long)arg1 {
-    if(UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation))
-        return %orig(2);
-    return %orig;
+    return screenMode;
 }
 %end
 %end
 
 //New Grid Switcher
-%group newgridswitcher
+%group NewGridSwitcher
 %hook SBAppSwitcherSettings
 -(void)setSwitcherStyle:(long long)arg1 {
     return %orig(2);
-}
-%end
-%end
-
-//Picture in Picture
-%group PictureInPicture
-#define k(key) CFEqual(string, CFSTR(key))
-extern "C" Boolean MGGetBoolAnswer(CFStringRef);
-%hookf(Boolean, MGGetBoolAnswer, CFStringRef string) {
-	if (k("nVh/gwNpy7Jv1NOk00CMrw"))
-		return YES;
-	return %orig;
-}
-%end
-
-//Camera UI Set
-%group CameraAppSet
-%hook CAMCaptureCapabilities
--(BOOL)isCTMSupported {
-    return isCameraUI11;
-}
-%end
-
-%hook CAMFlipButton
--(BOOL)_useCTMAppearance {
-    return isCameraZoomFlip11;
-}
-%end
-
-%hook CAMViewfinderViewController
--(BOOL)_shouldUseZoomControlInsteadOfSlider {
-    return isCameraZoomFlip11;
-}
-%end
-
-%hook CAMZoomControl
-- (void)setFrame:(CGRect)frame {
-    %orig(CGRectSetY(frame, frame.origin.y - bottomInset));
-}
-%end
-
-%hook CAMBottomBar
-- (void)setFrame:(CGRect)frame {
-    %orig(CGRectSetY(frame, frame.origin.y - bottomInset));
 }
 %end
 %end
@@ -810,7 +660,7 @@ extern "C" Boolean MGGetBoolAnswer(CFStringRef);
 %end
 
 //Swipe To Screenshot
-%group SwipeShot
+%group SwipeToScreenshot
 @interface UIWindow(SS)
 @property (nonatomic, retain) UIPanGestureRecognizer *ssGestureRecognizer;
 - (void)ssScreenshot;
@@ -845,7 +695,7 @@ extern "C" Boolean MGGetBoolAnswer(CFStringRef);
 %end
 
 //Landscape Lock
-%group LandscapeOrienLock
+%group LandscapeLock
 @interface SBOrientationLockManager : NSObject
 -(void)lock:(UIInterfaceOrientation)orientation;
 @end
@@ -862,7 +712,7 @@ extern "C" Boolean MGGetBoolAnswer(CFStringRef);
 %end
 
 //No Dock Background : Normal Dock
-%group NoNomalDockBackground
+%group NoNomalDockBG
 @interface SBDockView : UIView {
     UIView *_backgroundView;
 }
@@ -878,7 +728,7 @@ extern "C" Boolean MGGetBoolAnswer(CFStringRef);
 %end
 
 //No Dock Background : Floating Dock
-%group NoFloatingDockBackground
+%group NoFloatingDockBG
 @interface SBFloatingDockPlatterView : UIView {
     UIView *_backgroundView;
 }
@@ -970,7 +820,7 @@ static CGFloat offset = 0;
     return %orig;
 }
 
-- (void)layoutSubviews {
+-(void)layoutSubviews {
 	%orig;
 	UIView* timeView = MSHookIvar<UIView*>(self, "_timeLabel");
 	UIView* dateSubtitleView = MSHookIvar<UIView*>(self, "_dateSubtitleView");
@@ -982,7 +832,7 @@ static CGFloat offset = 0;
 %end
 
 %hook SBDashBoardLockScreenEnvironment
-- (void)handleBiometricEvent:(NSInteger)arg1 {
+-(void)handleBiometricEvent:(NSInteger)arg1 {
 	%orig;
 	if (arg1 == 4) {
 		SBDashBoardBiometricUnlockController* biometricUnlockController = MSHookIvar<SBDashBoardBiometricUnlockController*>(self, "_biometricUnlockController");
@@ -997,7 +847,7 @@ static CGFloat offset = 0;
 %end
 
 %hook WGWidgetGroupViewController
-- (void)updateViewConstraints {
+-(void)updateViewConstraints {
     %orig;
 	[self.view setFrame:CGRectSetY(self.view.frame, self.view.frame.origin.y + (offset/2))];
 }
@@ -1012,7 +862,7 @@ static CGFloat offset = 0;
 %end
 
 %hook CSCombinedListViewController
-- (UIEdgeInsets)_listViewDefaultContentInsets {
+-(UIEdgeInsets)_listViewDefaultContentInsets {
     UIEdgeInsets orig = %orig;
     orig.top += offset;
     return orig;
@@ -1020,7 +870,7 @@ static CGFloat offset = 0;
 %end
 
 %hook SBUIBiometricResource
-- (id)init {
+-(id)init {
 	id r = %orig;
 	MSHookIvar<BOOL>(r, "_hasMesaHardware") = NO;
 	MSHookIvar<BOOL>(r, "_hasPearlHardware") = YES;
@@ -1029,14 +879,14 @@ static CGFloat offset = 0;
 %end
 %end
 
-%group MakeToClean
+%group MakeSBClean
 // NoWidgetFooter
 @interface WGWidgetAttributionView
 @property (nonatomic, assign, readwrite, getter=isHidden) BOOL hidden;
 @end
 
 %hook WGWidgetAttributionView
-- (void)didMoveToWindow {
+-(void)didMoveToWindow {
     %orig;
     self.hidden = YES;
 }
@@ -1050,7 +900,7 @@ static CGFloat offset = 0;
 %end
 
 %hook CSPageControl
-- (id)initWithFrame:(struct CGRect)arg1 {
+-(id)initWithFrame:(struct CGRect)arg1 {
 	return nil;
 }
 %end
@@ -1066,83 +916,67 @@ static CGFloat offset = 0;
 //Tweak handle
 %ctor {
     @autoreleasepool {
-        %init;
         updatePrefs();
-        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)updatePrefs, CFSTR("com.hius.HalFiPadPrefs.settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce);
-        bool const isSpringBoard = [@"SpringBoard" isEqualToString:[NSProcessInfo processInfo].processName];
-        if (isSpringBoard) {
-            //StatusBar Style
-            if (statusBarMode != 0) {
-                %init(SwitchStatusBar);
-                if (statusBarMode == 4)
-                    %init(StatusBarCalibrate58);
-                else if(statusBarMode == 5)
-                    %init(StatusBarCalibrate61);
-                else if (statusBarMode == 3)
-                    %init(StatusBarXFix);
-            }
-            if (gesturesMode != 0) {
-                %init(CCStatusBar);
-                if (gesturesMode==4)
-                    %init(MiniatureGestures);
-            } else {
-                %init(FixCC134);
-                isiPadMultitask = NO;
-            }
-            //iPad features
-            if(isFloatingDock) {
-                %init(FloatingDock);
-                if (isiPadMultitask)
-                    %init(iPadMultitask);
-            }
-            if (isNewGridSwitcher) %init(newgridswitcher);
-            //General options
-            if (isBatteryPercent) %init(BatteryPercentage);
-            if (isCCGrabber) %init(ccGrabber);
-            if (!isCCStatusbar) %init(NoCCStatusBar);
-            if (isNoBreadcrumbs) %init(NoBreadcrumbs);
-            if (!isiPXCombination) %init(OriginalButtons);
-            //RoundCorners
-            if (screenRound > 0) %init(RoundCorners);
-            if (appDockRound > 5) %init(AppDock);
-            //More options
-            if (isMakeClean) %init(MakeToClean);
-            if (isMoreIconDock) %init(MoreIconDock);
-            if (isFastOpenApp) %init(FastOpenApp);
-            if (isNoDockBackgroud) {
-                if(!isFloatingDock)
-                    %init(NoNomalDockBackground);
-                else
-                    %init(NoFloatingDockBackground);
-            }
-            if (isSwipeScreenshot) %init(SwipeShot);
-            if (isReduceRows) %init(ReduceRows);
-            if (isLandscapeLock) %init(LandscapeOrienLock);
-            if (isPadLock) %init(PadLock);
-
-        } else {//Fix apps
-            NSString const *bundleAppID = [[NSBundle mainBundle] bundleIdentifier];
-            if (statusBarMode == 3 || statusBarMode == 2) {
-                if (statusBarMode == 3) %init(fixApp1);
-                if ([bundleAppID isEqualToString:@"com.ss.iphone.ugc.Ame"] || [bundleAppID isEqualToString:@"com.viettel.viettelpay"]
-                    || [bundleAppID isEqualToString:@"com.burbn.instagram"] || [bundleAppID isEqualToString:@"com.atebits.Tweetie2"]) {
-                    %init(fixApp2);
-                }
-                if ([bundleAppID isEqualToString:@"com.google.ios.youtube"]) %init(FixYouTube);
-                if ([bundleAppID isEqualToString:@"com.facebook.Facebook"]) bottomInset += 1;
-            }
-            if ([bundleAppID isEqualToString:@"com.apple.camera"]) %init(CameraAppSet);
-            if ([bundleAppID isEqualToString:@"com.atebits.Tweetie2"]) bottomInset = 0;
-            if (screenMode == 0) {
-                %init(iPadAppStyle);
-                if ([bundleAppID isEqualToString:@"com.apple.weather"]) return;
-            }
+        CFNotificationCenterAddObserver(
+            CFNotificationCenterGetDarwinNotifyCenter(),
+            NULL,
+            (CFNotificationCallback)updatePrefs,
+            CFSTR("com.hius.HalFiPadPrefs.settingschanged"),
+            NULL,
+            CFNotificationSuspensionBehaviorCoalesce
+        );
+        //StatusBar Style
+        if (statusBarMode != 0) {
+            %init(SwitchStatusBar);
+            if (statusBarMode == 4)
+                %init(StatusBarCalibrate58);
+            else if(statusBarMode == 5)
+                %init(StatusBarCalibrate61);
+            else if (statusBarMode == 3)
+                %init(StatusBarXFix);
         }
-        if (isPIP) %init(PictureInPicture);
+        if (gesturesMode != 0) {
+            %init(CCStatusBar);
+            if (gesturesMode==4)
+                %init(MiniatureGesture);
+        } else {
+            %init(FixCC134);
+            isiPadMultitask = NO;
+        }
+        //iPad features
+        if(isFloatingDock) {
+            %init(FloatingDock);
+            if (isiPadMultitask)
+                %init(iPadMultitask);
+        }
+        if (isNewGridSwitcher) %init(NewGridSwitcher);
+        //General options
+        if (isBatteryPercent) %init(BatteryPercentage);
+        if (isCCGrabber) %init(ccGrabber);
+        if (!isCCStatusbar) %init(NoCCStatusBar);
+        if (isNoBreadcrumb) %init(NoBreadcrumb);
+        if (!isiPXCombination) %init(OriginalButtons);
+        //Round Corner
+        if (screenRound > 0) %init(RoundCorner);
+        if (appDockRound > 5) %init(RoundAppDock);
+        //More options
+        if (isMakeSBClean) %init(MakeSBClean);
+        if (isMoreIconDock) %init(MoreIconDock);
+        if (isFastOpenApp) %init(FastOpenApp);
+        if (isNoDockBackgroud) {
+            if(!isFloatingDock)
+                %init(NoNomalDockBG);
+            else
+                %init(NoFloatingDockBG);
+        }
+        if (isSwipeScreenshot) %init(SwipeToScreenshot);
+        if (isReduceRows) %init(ReduceRows);
+        if (isLandscapeLock) %init(LandscapeLock);
+        if (isPadLock) %init(PadLock);
+
         //Home Bar
         if (isHomeBarCustom) %init(HomeBarCustom);
         if (isHomeBarAutoHide) {
-            %init(HomeBarAutoHide);
             isHomeBarSB = YES;
         }
         if (!isHomeBarLS) {
@@ -1150,15 +984,12 @@ static CGFloat offset = 0;
             if (!isHomeBarSB) %init(NoHomeBar);
         } else
             %init(HomeBar);
-        //Keyboard Options
-        if (isDarkKeyboard) %init(DarkKeyBoard);
-        if (isHigherKeyboard)
-            %init(HigherKeyboard);
-        else
-            %init(DefaultKeyboard);
+
         if (isNoSwipeKeyboard) {
             [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification object:nil queue:nil usingBlock:^(NSNotification *n) {isNoGesturesKeyboard = true;} ];
             [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification object:nil queue:nil usingBlock:^(NSNotification *n) {isNoGesturesKeyboard = false;} ];
         }
+
+        %init;
     }
 }

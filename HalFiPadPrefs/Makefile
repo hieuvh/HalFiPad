@@ -6,7 +6,7 @@ BUNDLE_NAME = HalFiPadPrefs
 
 HalFiPadPrefs_FILES = $(wildcard *.m)
 HalFiPadPrefs_INSTALL_PATH = /Library/PreferenceBundles
-HalFiPadPrefs_PRIVATE_FRAMEWORKS = Preferences SpringBoardServices
+HalFiPadPrefs_PRIVATE_FRAMEWORKS = Preferences SpringBoardServices OnBoardingKit
 
 include $(THEOS_MAKE_PATH)/bundle.mk
 

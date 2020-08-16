@@ -1,15 +1,17 @@
-ARCHS = arm64 arm64e
 FINALPACKAGE = 1
-
-include $(THEOS)/makefiles/common.mk
 
 export TARGET = iphone:13.3
 export ADDITIONAL_CFLAGS = -DTHEOS_LEAN_AND_MEAN -fobjc-arc
 
-TWEAK_NAME = HalFiPad
+include $(THEOS)/makefiles/common.mk
 
-HalFiPad_FILES = Tweak.xm
-HalFiPad_LIBRARIES = MobileGestalt
+TWEAK_NAME = HalFiPadSB HalFiPadUI
+
+HalFiPadSB_FILES = TweakSB.xm
+HalFiPadUI_FILES = TweakUI.xm
+HalFiPadUI_LIBRARIES = MobileGestalt
+
+ARCHS = arm64 arm64e
 
 include $(THEOS_MAKE_PATH)/tweak.mk
 SUBPROJECTS += HalFiPadPrefs

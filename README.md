@@ -1,23 +1,25 @@
 # HalFiPad
-iPhone 11 features, iPad features, many unique features but lightweight and less battery drain.<br>
+Bring modern gestures and many unique features to your iPhone, but lightweight and less battery drain.
+![Welcome to HalFiPad](https://github.com/v-hius/HalFiPad/raw/master/packages/welcome.PNG)
 # Features:
 * iPhone X gestures (include Only Left, Only Right).
 * Miniature(similar iPhone X gestures): Reduce the ability to switch applications quickly when swiping left or right on the bottom edge.
-* iPad, iPhone X, iPhone X-11 Calibrate, and regular status bar.
+* Edge Protect (double swipe to gesture).
+* Status Bar: iPad, iPhone X, Calibrate, and Regular.
 * Battery Percentage with many options to customize.
 * Bottom Inset, Rounded Dock, AppSwitcher, Screen Corner.
-* Custom Home Bar.
-* CC Grabber, CC Status Bar.
+* Home Bar with many options to customize.
+* CC Animation, CC Grabber, CC Status Bar.
 * Screenshot buttons combination like iPhone X.
 * Lockscreen Shortcuts.
 * No Breadcrumbs.
-* iPad features: Floating Dock, Split View- Slide Over, Landscape App Style, New Grid Switcher, PiP
-* Dark Keyboard, Higher Keyboard, Non-Latin Keyboard (fix conflict right padding).
-* Camera UI 11 (beta).
-* FaceID + Padlock.
+* iPad features: Floating Dock, Split View/Slide Over, Landscape App Style, New Grid Switcher, Picture in Picture.
+* Dark Keyboard, Higher Keyboard (with height custom), Non-Latin Keyboard (fix conflict right padding), No Gesture When Keyboard.
+* Camera UI (beta), Zoom and Flip Control like iPhone 11.
+* FaceID + Padlock Animation.
 * Fast Open App.
 * Landscape Orientation Lock.
-* Make Clean UI.
+* Make SB Clean.
 * More Icon Dock.
 * No Dock Background.
 * No Icons Fly.
@@ -27,10 +29,12 @@ iPhone 11 features, iPad features, many unique features but lightweight and less
 # Build
 Install [Theos](https://github.com/theos/theos)
 > make do
-# Author
-HalFiPad is a fork by Hiếu Vũ.
-# Credit
-* Ryannair05  [Little11](https://github.com/ryannair05/Little11)
-* SniperGER  [ProundLock2](https://github.com/SniperGER/ProudLock2)
-* VitaTaf  [HomeGesture](https://github.com/VitaTaf/HomeGesture)
-* duraidabdul  [Neptune](https://github.com/duraidabdul/Neptune)
+# Info
+* HalFiPad is a fork of Little11.
+* Make it better by me.
+# Credits
+* Ryannair05 [Little11](https://github.com/ryannair05/Little11)
+* SniperGER [ProundLock2](https://github.com/SniperGER/ProudLock2)
+* VitaTaf [HomeGesture](https://github.com/VitaTaf/HomeGesture)
+* duraidabdul [Neptune](https://github.com/duraidabdul/Neptune)
+* brian9206 [HomeDockX](https://github.com/brian9206/HomeDockX)

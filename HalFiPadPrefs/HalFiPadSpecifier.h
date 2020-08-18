@@ -16,10 +16,10 @@
 @end
 
 @interface HalFiPadRootListController : PSListController
-@property (nonatomic, retain) UIBarButtonItem *respringButton;
 @property (nonatomic, retain) NSMutableDictionary *savedSpecifiers;
+@property (nonatomic, retain) UIBarButtonItem *respringButton;
 @end
 
-@interface PSListController (WelcomeDisplay)
+@interface PSListController (WD)
 -(BOOL)containsSpecifier:(id)arg1;
 @end

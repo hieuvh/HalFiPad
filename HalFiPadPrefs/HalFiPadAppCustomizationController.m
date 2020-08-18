@@ -11,6 +11,7 @@
 		NSMutableArray *testingSpecs = [[self loadSpecifiersFromPlistName:@"AppCustomization" target:self] mutableCopy];
         _specifiers = testingSpecs;
     }
+
 	return _specifiers;
 }
 

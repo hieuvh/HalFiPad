@@ -1,4 +1,4 @@
-#import "Tweak.h"
+#import "TweakCommon.h"
 
 //Enable Gestures
 %hook BSPlatform
@@ -434,7 +434,8 @@ int applicationDidFinishLaunching;
 //Edge Protect
 %hook SBDeviceApplicationSceneHandle
 -(BOOL)isEdgeProtectEnabledForHomeGesture {
-    return isEdgeProtect;
+    if (isEdgeProtect) return YES;
+    return %orig;
 }
 
 //HomeBar Auto Hide
@@ -568,7 +569,7 @@ void resetTouch(SBHomeGesturePanGestureRecognizer *self, NSSet *touches, id even
 
 %hook SBFloatingDockBehaviorAssertion
 -(BOOL)gesturePossible {
-    if(!isFloatingGesture) return NO;
+    if(!isInAppDock) return NO;
     return %orig;
 }
 %end
@@ -684,12 +685,10 @@ void resetTouch(SBHomeGesturePanGestureRecognizer *self, NSSet *touches, id even
 -(void)layoutSubviews {
     %orig;
     if (self.ssGestureRecognizer) return;
-    else {
-        self.ssGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(ssScreenshot)];
-        self.ssGestureRecognizer.minimumNumberOfTouches = 2;
-        self.ssGestureRecognizer.cancelsTouchesInView = NO;
-        [self addGestureRecognizer:self.ssGestureRecognizer];
-    }
+    self.ssGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(ssScreenshot)];
+    self.ssGestureRecognizer.minimumNumberOfTouches = 2;
+    self.ssGestureRecognizer.cancelsTouchesInView = NO;
+    [self addGestureRecognizer:self.ssGestureRecognizer];
 }
 %end
 %end
@@ -749,7 +748,7 @@ void resetTouch(SBHomeGesturePanGestureRecognizer *self, NSSet *touches, id even
 - (NSUInteger)numberOfPortraitColumns {
     NSUInteger rows = MSHookIvar<NSUInteger>(self, "_numberOfPortraitRows");
     if (rows==1) {
-        if (!isFloatingDock) return 5;
+        if (!isiPadDock) return 5;
         return 6;
     }
     return %orig;
@@ -944,7 +943,7 @@ static CGFloat offset = 0;
             isiPadMultitask = NO;
         }
         //iPad features
-        if(isFloatingDock) {
+        if(isiPadDock) {
             %init(FloatingDock);
             if (isiPadMultitask)
                 %init(iPadMultitask);
@@ -964,7 +963,7 @@ static CGFloat offset = 0;
         if (isMoreIconDock) %init(MoreIconDock);
         if (isFastOpenApp) %init(FastOpenApp);
         if (isNoDockBackgroud) {
-            if(!isFloatingDock)
+            if(!isiPadDock)
                 %init(NoNomalDockBG);
             else
                 %init(NoFloatingDockBG);

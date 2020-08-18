@@ -1,4 +1,4 @@
-#import "Tweak.h"
+#import "TweakCommon.h"
 
 //Bottom Inset
 %hook UIWindow
@@ -113,7 +113,7 @@
 
 %hook UIKeyboardDockView
 - (CGRect)bounds {
-    CGRect const bounds = %orig;
+    CGRect bounds = %orig;
     return CGRectSetY(bounds, KeyboardBound);
 }
 %end
@@ -204,6 +204,7 @@ static bool appID(NSString *keyString) {
                 else if (statusBarMode == 3 && appID(@"com.burbn.instagram"))
                     %init(FixInstagram);
             }
+
             if (appID(@"com.atebits.Tweetie2"))
                 %init(FixTwitter);
             else if (appID(@"com.apple.camera")) {

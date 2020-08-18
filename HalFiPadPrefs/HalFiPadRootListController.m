@@ -3,6 +3,8 @@
 #import <SpringBoardServices/SBSRestartRenderServerAction.h>
 #import <FrontBoardServices/FBSSystemService.h>
 
+#define pATH @"/var/mobile/Library/Preferences/com.hius.HalFiPadPrefs.plist"
+
 @interface HalFiPadSwitchCell : PSSwitchTableCell
 -(id)initWithStyle:(int)arg1 reuseIdentifier:(id)arg2 specifier:(id)arg3 ;
 @end
@@ -90,7 +92,6 @@ OBWelcomeController *welcomeController;
 	return _specifiers;
 }
 
-
 - (NSMutableArray*)groupSpec {
     NSMutableArray *specifiers = [NSMutableArray array];
     PSSpecifier* groupSpecifier = [
@@ -131,54 +132,10 @@ OBWelcomeController *welcomeController;
 }
 
 - (void)respring {
-    NSURL *returnURL = [NSURL URLWithString:@"prefs:root=HalFiPad"]; 
+    NSURL *returnURL = [NSURL URLWithString:@"prefs:root=HalFiPad"];
     SBSRelaunchAction *restartAction;
     restartAction = [NSClassFromString(@"SBSRelaunchAction") actionWithReason:@"RestartRenderServer" options:SBSRelaunchActionOptionsFadeToBlackTransition targetURL:returnURL];
     [[NSClassFromString(@"FBSSystemService") sharedService] sendActions:[NSSet setWithObject:restartAction] withResult:nil];
-}
-
--(void)viewDidLoad {
-	[super viewDidLoad];
-    UIBarButtonItem *respringButton = [
-        [UIBarButtonItem alloc]
-        initWithTitle:@"Apply"
-        style:UIBarButtonItemStylePlain
-        target:self
-        action:@selector(respringPrompt)];
-	self.navigationItem.rightBarButtonItem = respringButton;
-
-    NSString *path = @"/var/mobile/Library/Preferences/com.hius.HalFiPadPrefs.plist";
-    NSMutableDictionary *settings = [NSMutableDictionary dictionary];
-	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:path]];
-	NSNumber *didShowOBWelcomeController = [settings valueForKey:@"didShowOBWelcomeController"] ?: @0;
-	if([didShowOBWelcomeController isEqual:@0]){
-		[self setupWelcomeController];
-	}
-
-    NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.hius.HalFiPadPrefs.plist"];
-    if(![prefs[@"highKeyboard"] boolValue]) {
-        [self removeContiguousSpecifiers:@[self.savedSpecifiers[@"heightKeyboardID"]] animated:YES];
-        [self removeContiguousSpecifiers:@[self.savedSpecifiers[@"boundKeyboardID"]] animated:YES];
-    }
-}
-
--(void)dismissWelcomeController {
-    NSString *path = @"/var/mobile/Library/Preferences/com.hius.HalFiPadPrefs.plist";
-	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
-	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:path]];
-	[settings setObject:@1 forKey:@"didShowOBWelcomeController"];
-	[settings writeToFile:path atomically:YES];
-	[welcomeController dismissViewControllerAnimated:YES completion:nil];
-}
-
--(void)reloadSpecifiers {
-    [super reloadSpecifiers];
-
-    NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.hius.HalFiPadPrefs.plist"];
-    if(![prefs[@"highKeyboard"] boolValue]) {
-        [self removeContiguousSpecifiers:@[self.savedSpecifiers[@"heightKeyboardID"]] animated:NO];
-        [self removeContiguousSpecifiers:@[self.savedSpecifiers[@"boundKeyboardID"]] animated:NO];
-    }
 }
 
 - (void)respringPrompt {
@@ -198,8 +155,72 @@ OBWelcomeController *welcomeController;
 	[self presentViewController:respringAlert animated:YES completion:nil];
 }
 
-- (void)openTwitter:(id)arg1 {
+-(void)resetSetting {
+    if([[NSFileManager defaultManager] removeItemAtPath:pATH error: nil]) {
+        [self respring];
+    }
+}
+
+- (void)resetPrompt {
+	UIAlertController *respringAlert = [UIAlertController alertControllerWithTitle:@"HalFiPad"
+	message:@"Do you want to Reset?"
+	preferredStyle:UIAlertControllerStyleActionSheet];
+
+	UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
+		[self resetSetting];
+	}];
+
+	UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:nil];
+
+	[respringAlert addAction:confirmAction];
+	[respringAlert addAction:cancelAction];
+
+	[self presentViewController:respringAlert animated:YES completion:nil];
+}
+
+-(void)openTwitter:(id)arg1 {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/helios017"] options:@{} completionHandler:nil];
 }
 
+-(void)viewDidLoad {
+	[super viewDidLoad];
+
+    UIBarButtonItem *respringButton = [
+        [UIBarButtonItem alloc]
+        initWithTitle:@"Apply"
+        style:UIBarButtonItemStylePlain
+        target:self
+        action:@selector(respringPrompt)];
+	self.navigationItem.rightBarButtonItem = respringButton;
+
+    NSMutableDictionary *settings = [NSMutableDictionary dictionary];
+	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:pATH]];
+	NSNumber *didShowOBWelcomeController = [settings valueForKey:@"didShowOBWelcomeController"] ?: @0;
+	if([didShowOBWelcomeController isEqual:@0]){
+		[self setupWelcomeController];
+	}
+
+    NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfFile:pATH];
+    if(![prefs[@"highKeyboard"] boolValue]) {
+        [self removeContiguousSpecifiers:@[self.savedSpecifiers[@"heightKeyboardID"]] animated:YES];
+        [self removeContiguousSpecifiers:@[self.savedSpecifiers[@"boundKeyboardID"]] animated:YES];
+    }
+}
+
+-(void)reloadSpecifiers {
+    [super reloadSpecifiers];
+    NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfFile:pATH];
+    if(![prefs[@"highKeyboard"] boolValue]) {
+        [self removeContiguousSpecifiers:@[self.savedSpecifiers[@"heightKeyboardID"]] animated:NO];
+        [self removeContiguousSpecifiers:@[self.savedSpecifiers[@"boundKeyboardID"]] animated:NO];
+    }
+}
+
+-(void)dismissWelcomeController {
+	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
+	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:pATH]];
+	[settings setObject:@1 forKey:@"didShowOBWelcomeController"];
+	[settings writeToFile:pATH atomically:YES];
+	[welcomeController dismissViewControllerAnimated:YES completion:nil];
+}
 @end

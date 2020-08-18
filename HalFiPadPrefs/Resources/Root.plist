@@ -583,9 +583,9 @@
 					<key>cellClass</key>
   					<string>HalFiPadSwitchCell</string>
 					<key>label</key>
-					<string>◦ Floating Dock</string>
+					<string>◦ iPad Dock</string>
 					<key>key</key>
-					<string>floatingDock</string>
+					<string>ipadDock</string>
 					<key>defaults</key>
 					<string>com.hius.HalFiPadPrefs</string>
 					<key>default</key>
@@ -597,9 +597,9 @@
 					<key>cellClass</key>
   					<string>HalFiPadSwitchCell</string>
 					<key>label</key>
-					<string>◦ Gesture Dock First</string>
+					<string>◦ In-App Dock</string>
 					<key>key</key>
-					<string>floatingGesture</string>
+					<string>inAppDock</string>
 					<key>defaults</key>
 					<string>com.hius.HalFiPadPrefs</string>
 					<key>default</key>
@@ -860,15 +860,6 @@
 			<string>✯ More options</string>
 			<key>cell</key>
 			<string>PSGroupCell</string>
-			<key>footerText</key>
-			<string>
-⚠ Note:
-◦ Miniature: reduce the ability to switch applications quickly when swiping left or right on the bottom edge.
-◦ Swipe To Screenshot: 2-finger at once swipe down from the status bar.
-◦ Make SB Clean: remove icon labels, dots, weather footer text.
-◦ Edge Protect: double swipe to gesture.
-✔ RESPRING TO TAKE EFFECT.
-</string>
 		</dict>
 		<dict>
 			<key>cellClass</key>
@@ -981,6 +972,31 @@
 			<true/>
 			<key>PostNotification</key>
 			<string>com.hius.HalFiPadPrefs.settingschanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		<key>footerText</key>
+		<string>
+⚠ Note:
+◦ Miniature: reduce the ability to switch applications quickly when swiping left or right on the bottom edge.
+◦ Swipe To Screenshot: 2-finger at once swipe down from the status bar.
+◦ Make SB Clean: remove icon labels, dots, weather footer text.
+◦ Edge Protect: double swipe to gesture.
+✔ RESPRING TO TAKE EFFECT.
+</string>
+		</dict>
+		<dict>
+			<key>label</key>
+			<string>◦ Reset all settings</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>action</key>
+			<string>resetPrompt</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
 		</dict>
 	</array>
 	<key>title</key>

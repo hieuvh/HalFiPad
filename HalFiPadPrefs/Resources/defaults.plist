@@ -6,9 +6,9 @@
 	<integer>1</integer>
 	<key>statusBarMode</key>
 	<integer>4</integer>
-	<key>floatingDock</key>
+	<key>ipadDock</key>
 	<false/>
-	<key>floatingGesture</key>
+	<key>inAppDock</key>
 	<true/>
 	<key>recentApp</key>
 	<true/>

@@ -95,6 +95,8 @@
 			<true/>
 			<key>PostNotification</key>
 			<string>com.hius.HalFiPadPrefs.settingschanged</string>
+			<key>id</key>
+   			<string>higherKeyboardID</string>
 		</dict>
 		<dict>
 			<key>cellClass</key>

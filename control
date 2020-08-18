@@ -1,7 +1,7 @@
 Package: com.hius.halfipad
 Name: HalFiPad
 Depends: mobilesubstrate, preferenceloader
-Version: 3.5.0
+Version: 3.5.1
 Architecture: iphoneos-arm
 Description: Modern gestures, iPad features, and many unique features but lightweight and less battery drain.
 Maintainer: Hius

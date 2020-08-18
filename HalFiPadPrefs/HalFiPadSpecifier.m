@@ -10,7 +10,7 @@ extern "C" {
 #endif
 
 static OrderedDictionary *dataSourceUser;
-
+ 
 @implementation HalFiPadSpecifier
 - (NSArray *)specifiers {
 	if (_specifiers == nil) {

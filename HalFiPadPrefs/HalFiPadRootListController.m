@@ -3,8 +3,6 @@
 #import <SpringBoardServices/SBSRestartRenderServerAction.h>
 #import <FrontBoardServices/FBSSystemService.h>
 
-#define pATH @"/var/mobile/Library/Preferences/com.hius.HalFiPadPrefs.plist"
-
 @interface HalFiPadSwitchCell : PSSwitchTableCell
 -(id)initWithStyle:(int)arg1 reuseIdentifier:(id)arg2 specifier:(id)arg3 ;
 @end
@@ -19,64 +17,54 @@
 }
 @end
 
-@interface OBButtonTray : UIView
-- (void)addButton:(id)arg1;
-- (void)addCaptionText:(id)arg1;;
-@end
+@implementation HalFiPadListControler
+- (id)specifiers {
+    return _specifiers;
+}
 
-@interface OBBoldTrayButton : UIButton
--(void)setTitle:(id)arg1 forState:(unsigned long long)arg2;
-+(id)buttonWithType:(long long)arg1;
-@end
+- (void)loadFromSpecifier:(PSSpecifier *)specifier {
 
-@interface OBWelcomeController : UIViewController
-- (OBButtonTray *)buttonTray;
-- (id)initWithTitle:(id)arg1 detailText:(id)arg2 icon:(id)arg3;
-- (void)addBulletedListItemWithTitle:(id)arg1 description:(id)arg2 image:(id)arg3;
+    NSString *sub = [specifier propertyForKey:@"LinkPrefs"];
+    NSString *title = [specifier name];
+
+    _specifiers = [self loadSpecifiersFromPlistName:sub target:self];
+
+    [self setTitle:title];
+    [self.navigationItem setTitle:title];
+}
+
+- (void)setSpecifier:(PSSpecifier *)specifier {
+    [self loadFromSpecifier:specifier];
+    [super setSpecifier:specifier];
+}
+
+- (id)readPreferenceValue:(PSSpecifier*)specifier {
+	NSString *path = [NSString stringWithFormat:@"/User/Library/Preferences/%@.plist", specifier.properties[@"defaults"]];
+	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
+	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:path]];
+	return (settings[specifier.properties[@"key"]]) ?: specifier.properties[@"default"];
+}
+
+- (void)setPreferenceValue:(id)value specifier:(PSSpecifier*)specifier {
+	NSString *path = [NSString stringWithFormat:@"/User/Library/Preferences/%@.plist", specifier.properties[@"defaults"]];
+	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
+	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:path]];
+	[settings setObject:value forKey:specifier.properties[@"key"]];
+	[settings writeToFile:path atomically:YES];
+	CFStringRef notificationName = (__bridge CFStringRef)specifier.properties[@"PostNotification"];
+	if (notificationName) {
+		CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), notificationName, NULL, NULL, YES);
+	}
+}
 @end
 
 OBWelcomeController *welcomeController;
 
 @implementation HalFiPadRootListController
 
-- (id)readPreferenceValue:(PSSpecifier*)specifier {
-    NSString *path = [NSString stringWithFormat:@"/User/Library/Preferences/%@.plist", specifier.properties[@"defaults"]];
-    NSMutableDictionary *settings = [NSMutableDictionary dictionary];
-    [settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:path]];
-    return (settings[specifier.properties[@"key"]]) ?: specifier.properties[@"default"];
-}
-
-- (void)setPreferenceValue:(id)value specifier:(PSSpecifier*)specifier {
-    NSString *path = [NSString stringWithFormat:@"/User/Library/Preferences/%@.plist", specifier.properties[@"defaults"]];
-    NSMutableDictionary *settings = [NSMutableDictionary dictionary];
-    [settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:path]];
-    [settings setObject:value forKey:specifier.properties[@"key"]];
-    [settings writeToFile:path atomically:YES];
-    CFStringRef notificationName = (__bridge CFStringRef)specifier.properties[@"PostNotification"];
-    if (notificationName) {
-        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), notificationName, NULL, NULL, YES);
-    }
-
-    NSString *key = [specifier propertyForKey:@"key"];
-    if([key isEqualToString:@"highKeyboard"]) {
-        if(![value boolValue]) {
-            [self removeContiguousSpecifiers:@[self.savedSpecifiers[@"heightKeyboardID"]] animated:YES];
-            [self removeContiguousSpecifiers:@[self.savedSpecifiers[@"boundKeyboardID"]] animated:YES]; 
-        } else {
-            if(![self containsSpecifier:self.savedSpecifiers[@"heightKeyboardID"]]) {
-                [self insertContiguousSpecifiers:@[self.savedSpecifiers[@"heightKeyboardID"]] afterSpecifierID:@"higherKeyboardID" animated:YES];
-                if(![self containsSpecifier:self.savedSpecifiers[@"boundKeyboardID"]]) {
-                    [self insertContiguousSpecifiers:@[self.savedSpecifiers[@"boundKeyboardID"]] afterSpecifierID:@"heightKeyboardID" animated:YES];
-                }
-            }
-            
-        }
-    }
-}
-
 - (NSArray *)specifiers {
 	if (_specifiers == nil) {
-		NSMutableArray *testingSpecs = [[self loadSpecifiersFromPlistName:@"Root" target:self] mutableCopy];
+		NSMutableArray *testingSpecs = _specifiers = [self loadSpecifiersFromPlistName:@"Root" target:self];//[[self loadSpecifiersFromPlistName:@"Root" target:self] mutableCopy];
         [testingSpecs addObjectsFromArray:[self groupSpec]];
         _specifiers = testingSpecs;
     }
@@ -115,7 +103,7 @@ OBWelcomeController *welcomeController;
     [welcomeController addBulletedListItemWithTitle:@"Convenient" description:@"Built to fulfill its purpose easily." image:[UIImage systemImageNamed:@"tray.full.fill"]];
     [welcomeController addBulletedListItemWithTitle:@"Optimized" description:@"Lightweight and less battery drain." image:[UIImage systemImageNamed:@"battery.100"]];
     [welcomeController addBulletedListItemWithTitle:@"Open Source" description:@"HalFiPad is open source. Enjoy it!" image:[UIImage systemImageNamed:@"chevron.left.slash.chevron.right"]];
-    [welcomeController.buttonTray addCaptionText:@"Made with love by Hius."];
+    [welcomeController.buttonTray addCaptionText:@"Made by Hius."];
 
     OBBoldTrayButton* continueButton = [OBBoldTrayButton buttonWithType:1];
     [continueButton addTarget:self action:@selector(dismissWelcomeController) forControlEvents:UIControlEventTouchUpInside];
@@ -132,10 +120,20 @@ OBWelcomeController *welcomeController;
 }
 
 - (void)respring {
-    NSURL *returnURL = [NSURL URLWithString:@"prefs:root=HalFiPad"];
-    SBSRelaunchAction *restartAction;
-    restartAction = [NSClassFromString(@"SBSRelaunchAction") actionWithReason:@"RestartRenderServer" options:SBSRelaunchActionOptionsFadeToBlackTransition targetURL:returnURL];
-    [[NSClassFromString(@"FBSSystemService") sharedService] sendActions:[NSSet setWithObject:restartAction] withResult:nil];
+    UIBlurEffect* blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular];
+    UIVisualEffectView* blurView = [[UIVisualEffectView alloc] initWithEffect:blur];
+    [blurView setFrame:self.view.bounds];
+    [blurView setAlpha:0.0];
+    [[self view] addSubview:blurView];
+
+    [UIView animateWithDuration:1.0 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [blurView setAlpha:1.0];
+    } completion:^(BOOL finished) {
+        NSURL *returnURL = [NSURL URLWithString:@"prefs:root=HalFiPad"];
+        SBSRelaunchAction *restartAction;
+        restartAction = [NSClassFromString(@"SBSRelaunchAction") actionWithReason:@"RestartRenderServer" options:SBSRelaunchActionOptionsFadeToBlackTransition targetURL:returnURL];
+        [[NSClassFromString(@"FBSSystemService") sharedService] sendActions:[NSSet setWithObject:restartAction] withResult:nil];
+    }];
 }
 
 - (void)respringPrompt {
@@ -156,7 +154,7 @@ OBWelcomeController *welcomeController;
 }
 
 -(void)resetSetting {
-    if([[NSFileManager defaultManager] removeItemAtPath:pATH error: nil]) {
+    if([[NSFileManager defaultManager] removeItemAtPath:@"/var/mobile/Library/Preferences/com.hius.HalFiPadPrefs.plist" error: nil]) {
         [self respring];
     }
 }
@@ -194,13 +192,13 @@ OBWelcomeController *welcomeController;
 	self.navigationItem.rightBarButtonItem = respringButton;
 
     NSMutableDictionary *settings = [NSMutableDictionary dictionary];
-	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:pATH]];
+	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.hius.HalFiPadPrefs.plist"]];
 	NSNumber *didShowOBWelcomeController = [settings valueForKey:@"didShowOBWelcomeController"] ?: @0;
 	if([didShowOBWelcomeController isEqual:@0]){
 		[self setupWelcomeController];
 	}
 
-    NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfFile:pATH];
+    NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.hius.HalFiPadPrefs.plist"];
     if(![prefs[@"highKeyboard"] boolValue]) {
         [self removeContiguousSpecifiers:@[self.savedSpecifiers[@"heightKeyboardID"]] animated:YES];
         [self removeContiguousSpecifiers:@[self.savedSpecifiers[@"boundKeyboardID"]] animated:YES];
@@ -209,7 +207,7 @@ OBWelcomeController *welcomeController;
 
 -(void)reloadSpecifiers {
     [super reloadSpecifiers];
-    NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfFile:pATH];
+    NSDictionary *prefs = [NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.hius.HalFiPadPrefs.plist"];
     if(![prefs[@"highKeyboard"] boolValue]) {
         [self removeContiguousSpecifiers:@[self.savedSpecifiers[@"heightKeyboardID"]] animated:NO];
         [self removeContiguousSpecifiers:@[self.savedSpecifiers[@"boundKeyboardID"]] animated:NO];
@@ -218,9 +216,45 @@ OBWelcomeController *welcomeController;
 
 -(void)dismissWelcomeController {
 	NSMutableDictionary *settings = [NSMutableDictionary dictionary];
-	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:pATH]];
+	[settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:@"/var/mobile/Library/Preferences/com.hius.HalFiPadPrefs.plist"]];
 	[settings setObject:@1 forKey:@"didShowOBWelcomeController"];
-	[settings writeToFile:pATH atomically:YES];
+	[settings writeToFile:@"/var/mobile/Library/Preferences/com.hius.HalFiPadPrefs.plist" atomically:YES];
 	[welcomeController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (id)readPreferenceValue:(PSSpecifier*)specifier {
+    NSString *path = [NSString stringWithFormat:@"/User/Library/Preferences/%@.plist", specifier.properties[@"defaults"]];
+    NSMutableDictionary *settings = [NSMutableDictionary dictionary];
+    [settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:path]];
+    return (settings[specifier.properties[@"key"]]) ?: specifier.properties[@"default"];
+}
+
+- (void)setPreferenceValue:(id)value specifier:(PSSpecifier*)specifier {
+    NSString *path = [NSString stringWithFormat:@"/User/Library/Preferences/%@.plist", specifier.properties[@"defaults"]];
+    NSMutableDictionary *settings = [NSMutableDictionary dictionary];
+    [settings addEntriesFromDictionary:[NSDictionary dictionaryWithContentsOfFile:path]];
+    [settings setObject:value forKey:specifier.properties[@"key"]];
+    [settings writeToFile:path atomically:YES];
+    CFStringRef notificationName = (__bridge CFStringRef)specifier.properties[@"PostNotification"];
+
+    if (notificationName) {
+        CFNotificationCenterPostNotification(CFNotificationCenterGetDarwinNotifyCenter(), notificationName, NULL, NULL, YES);
+    }
+
+    NSString *key = [specifier propertyForKey:@"key"];
+    if([key isEqualToString:@"highKeyboard"]) {
+        if(![value boolValue]) {
+            [self removeContiguousSpecifiers:@[self.savedSpecifiers[@"heightKeyboardID"]] animated:YES];
+            [self removeContiguousSpecifiers:@[self.savedSpecifiers[@"boundKeyboardID"]] animated:YES]; 
+        } else {
+            if(![self containsSpecifier:self.savedSpecifiers[@"heightKeyboardID"]]) {
+                [self insertContiguousSpecifiers:@[self.savedSpecifiers[@"heightKeyboardID"]] afterSpecifierID:@"higherKeyboardID" animated:YES];
+                if(![self containsSpecifier:self.savedSpecifiers[@"boundKeyboardID"]]) {
+                    [self insertContiguousSpecifiers:@[self.savedSpecifiers[@"boundKeyboardID"]] afterSpecifierID:@"heightKeyboardID" animated:YES];
+                }
+            }
+            
+        }
+    }
 }
 @end

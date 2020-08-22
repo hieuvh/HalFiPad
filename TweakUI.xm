@@ -70,6 +70,7 @@
 @end
 %hook YTHeaderContentComboView
 - (void)layoutSubviews {
+//-(void)viewDidLoad {
     %orig;
     if (statusBarMode == 3) {
         CGRect headerViewFrame = [[self headerView] frame];
@@ -113,7 +114,7 @@
 
 %hook UIKeyboardDockView
 - (CGRect)bounds {
-    CGRect bounds = %orig;
+    CGRect const bounds = %orig;
     return CGRectSetY(bounds, KeyboardBound);
 }
 %end
@@ -183,14 +184,11 @@ static bool appID(NSString *keyString) {
 //Tweak handle
 %ctor {
     @autoreleasepool {
+        %init;
         updatePrefs();
         CFNotificationCenterAddObserver(
-            CFNotificationCenterGetDarwinNotifyCenter(),
-            NULL,
-            (CFNotificationCallback)updatePrefs,
-            CFSTR("com.hius.HalFiPadPrefs.settingschanged"),
-            NULL,
-            CFNotificationSuspensionBehaviorCoalesce
+            CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)updatePrefs,
+            CFSTR("com.hius.HalFiPadPrefs.settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce
         );
         bool const isApp = [[[[NSProcessInfo processInfo] arguments] objectAtIndex:0] containsString:@"/Application"];
         if (isApp) {
@@ -228,7 +226,5 @@ static bool appID(NSString *keyString) {
             %init(HigherKeyboard);
         else
             %init(DefaultKeyboard);
-
-        %init;
     }
 }

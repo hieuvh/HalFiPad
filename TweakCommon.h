@@ -1,9 +1,5 @@
 #import <UIKit/UIKit.h>
-
 #define CGRectSetY(rect, y) CGRectMake(rect.origin.x, y, rect.size.width, rect.size.height)
-#define pREFS [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.hius.HalFiPadPrefs.plist"]
-#define pATH @"/User/Library/Preferences/com.hius.HalFiPadPrefs.plist"
-#define pATH_deFAULT @"/Library/PreferenceBundles/HalFiPadPrefs.bundle/defaults.plist"
 
 typedef struct SBIconCoordinate {
     NSInteger row;
@@ -38,12 +34,13 @@ BOOL isCCStatusbar, isCCGrabber, isCCAnimation, isNoBreadcrumb;
 BOOL isiPXCombination, isReachability, isLSShortcuts, isPadLock;
 
 //Battery Percent - BP
-BOOL isBatteryPercent, isDynamicColorBP, isStaticColorBP;
+BOOL isBatteryPercent, isDynamicColor, isStaticColor;
 BOOL isStockPercentCharging, isHideChargingIndicator, isHideStockPercent;
 
 //Keyboard options
 BOOL isHigherKeyboard, isDarkKeyboard, isNonLatinKeyboard;
 BOOL isNoSwipeKeyboard, isNoGesturesKeyboard;
+
 //Camera Options
 BOOL isCameraBottomSet, isCameraUI11, isCameraZoomFlip11;
 
@@ -53,19 +50,22 @@ BOOL isMakeSBClean, isMoreIconDock, isReduceRows, isSwipeScreenshot;
 
 //Handle Preferences:
 static BOOL boolValueForKey(NSString *key) {
-    return [[pREFS objectForKey:key] boolValue];
+    NSDictionary const *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.hius.HalFiPadPrefs.plist"];
+    return [[prefs objectForKey:key] boolValue];
 }
 
 static int intValueForKey(NSString *key) {
-    return [[pREFS objectForKey:key] integerValue];
+    NSDictionary const *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.hius.HalFiPadPrefs.plist"];
+    return [[prefs objectForKey:key] integerValue];
 }
 
 static void updatePrefs() {
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:pATH]) {
-        [fileManager copyItemAtPath:pATH_deFAULT toPath:pATH error:nil];
+    if (![fileManager fileExistsAtPath:@"/User/Library/Preferences/com.hius.HalFiPadPrefs.plist"]) {
+        [fileManager copyItemAtPath:@"/Library/PreferenceBundles/HalFiPadPrefs.bundle/defaults.plist" toPath:@"/User/Library/Preferences/com.hius.HalFiPadPrefs.plist" error:nil];
     }
-    if (pREFS) {
+    NSDictionary const *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.hius.HalFiPadPrefs.plist"];
+    if (prefs) {
         gesturesMode = intValueForKey(@"gesturesMode");
         statusBarMode = intValueForKey(@"statusBarMode");
         screenRound = intValueForKey(@"screenRound");
@@ -100,8 +100,8 @@ static void updatePrefs() {
         isiPXCombination = boolValueForKey(@"ipxCombination");
         //Battery Customization:
         isBatteryPercent = boolValueForKey(@"batteryPercent");
-        isDynamicColorBP = boolValueForKey(@"dynamicColorBP");
-        isStaticColorBP = boolValueForKey(@"staticColorBP");
+        isDynamicColor = boolValueForKey(@"dynamicColorBP");
+        isStaticColor = boolValueForKey(@"staticColorBP");
         isHideChargingIndicator = boolValueForKey(@"hideChargingIndicator");
         isHideStockPercent = boolValueForKey(@"hideStockPercent");
         isStockPercentCharging = boolValueForKey(@"stockPercentCharging");
@@ -125,7 +125,7 @@ static void updatePrefs() {
         isPadLock = boolValueForKey(@"padLock");
         //Per-App Customize
         NSString const *mainAppID = [NSBundle mainBundle].bundleIdentifier;
-        NSDictionary const *appCustomize = [pREFS objectForKey:mainAppID];
+        NSDictionary const *appCustomize = [prefs objectForKey:mainAppID];
         if (appCustomize) {
             screenMode = (NSInteger)[[appCustomize objectForKey:@"screenMode"]?:((NSNumber *)[NSNumber numberWithBool:screenMode]) integerValue];
             bottomInset = (NSInteger)[[appCustomize objectForKey:@"bottomInset"]?:((NSNumber *)[NSNumber numberWithBool:bottomInset]) integerValue];

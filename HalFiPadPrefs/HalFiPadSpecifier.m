@@ -10,20 +10,13 @@ extern "C" {
 #endif
 
 static OrderedDictionary *dataSourceUser;
- 
+
 @implementation HalFiPadSpecifier
 - (NSArray *)specifiers {
 	if (_specifiers == nil) {
-		NSMutableArray *testingSpecs = [[self loadSpecifiersFromPlistName:@"HalFiPadAppCustomizationController" target:self] mutableCopy];
+		NSMutableArray *testingSpecs = [self loadSpecifiersFromPlistName:@"HalFiPadAppCustomizationController" target:self];
         [testingSpecs addObjectsFromArray:[self appSpecifiers]];
         _specifiers = testingSpecs;
-
-        self.savedSpecifiers = [[NSMutableDictionary alloc] init];
-        for (PSSpecifier *specifier in [self specifiers]) {
-			if ([specifier propertyForKey:@"id"]) {
-				[self.savedSpecifiers setObject:specifier forKey:[specifier propertyForKey:@"id"]];
-		    }
-		}
     }
 	return _specifiers;
 }

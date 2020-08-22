@@ -175,7 +175,7 @@ static BOOL nopas = YES;
 %group NoCCStatusBar
 %hook CCUIStatusBar
 -(id)initWithFrame:(CGRect)arg1 {
-    return NULL;
+    return nil;
 }
 %end
 
@@ -215,7 +215,7 @@ static BOOL nopas = YES;
         else if (statusBarMode == 3)
             %orig(CGRectSetY(frame, 9));
         else if (statusBarMode == 0)
-            %orig(CGRectSetY(frame, -33));
+            %orig(CGRectSetY(frame, -34));
         else
             %orig(CGRectSetY(frame, -15));
     } else {
@@ -248,7 +248,7 @@ static BOOL nopas = YES;
 
 %new
 - (UIColor *)_batteryColor {
-    if (isDynamicColorBP) {
+    if (isDynamicColor) {
         CGFloat chargePercent = self.chargePercent;
 	    if(chargePercent >= 0.95) {
 	    	return [UIColor colorWithRed:0.08 green:0.71 blue:1.00 alpha:1.0];
@@ -315,12 +315,12 @@ static BOOL nopas = YES;
 }
 
 -(UIColor *)bodyColor {
-    if (!isStaticColorBP && !isDynamicColorBP) return %orig;
+    if (!isStaticColor && !isDynamicColor) return %orig;
     return [self _batteryColor];
 }
 
 -(UIColor *)pinColor {
-    if (!isStaticColorBP && !isDynamicColorBP) return %orig;
+    if (!isStaticColor && !isDynamicColor) return %orig;
     return [self _batteryColor];
 }
 
@@ -628,7 +628,7 @@ void resetTouch(SBHomeGesturePanGestureRecognizer *self, NSSet *touches, id even
 //New Grid Switcher
 %group NewGridSwitcher
 %hook SBAppSwitcherSettings
--(void)setSwitcherStyle:(long long)arg1 {
+-(void)setSwitcherStyle:(NSInteger)arg1 {
     return %orig(2);
 }
 %end
@@ -915,14 +915,11 @@ static CGFloat offset = 0;
 //Tweak handle
 %ctor {
     @autoreleasepool {
+        %init;
         updatePrefs();
         CFNotificationCenterAddObserver(
-            CFNotificationCenterGetDarwinNotifyCenter(),
-            NULL,
-            (CFNotificationCallback)updatePrefs,
-            CFSTR("com.hius.HalFiPadPrefs.settingschanged"),
-            NULL,
-            CFNotificationSuspensionBehaviorCoalesce
+            CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)updatePrefs,
+            CFSTR("com.hius.HalFiPadPrefs.settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce
         );
         //StatusBar Style
         if (statusBarMode != 0) {
@@ -988,7 +985,5 @@ static CGFloat offset = 0;
             [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardDidShowNotification object:nil queue:nil usingBlock:^(NSNotification *n) {isNoGesturesKeyboard = true;} ];
             [[NSNotificationCenter defaultCenter] addObserverForName:UIKeyboardWillHideNotification object:nil queue:nil usingBlock:^(NSNotification *n) {isNoGesturesKeyboard = false;} ];
         }
-
-        %init;
     }
 }

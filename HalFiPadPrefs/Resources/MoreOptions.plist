@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>items</key>
+        <array>
+            <dict>
+                <key>label</key>
+                <string>✯ Camera UI</string>
+                <key>cell</key>
+                <string>PSGroupCell</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ Bottom Inset</string>
+                <key>key</key>
+                <string>cameraBottomSet</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <false/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ Like iPhone 11 [beta]</string>
+                <key>key</key>
+                <string>cameraUI11</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <false/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ Zoom / Flips Control</string>
+                <key>key</key>
+                <string>cameraZoomFlip11</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <true/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            <dict>
+                <key>label</key>
+                <string>✯ Dock</string>
+                <key>cell</key>
+                <string>PSGroupCell</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ More Icons</string>
+                <key>key</key>
+                <string>moreIconDock</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <false/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ No Background</string>
+                <key>key</key>
+                <string>noDockBackground</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <false/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            <dict>
+                <key>label</key>
+                <string>✯ Homescreen</string>
+                <key>cell</key>
+                <string>PSGroupCell</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ No Icon Fly While Unlock</string>
+                <key>key</key>
+                <string>noIconsFly</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <true/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ Reduce Icon Row</string>
+                <key>key</key>
+                <string>reduceRows</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <false/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            <dict>
+                <key>label</key>
+                <string>✯ Springboard</string>
+                <key>cell</key>
+                <string>PSGroupCell</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ No Launch App Animation</string>
+                <key>key</key>
+                <string>fastOpenApp</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <false/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ Force Orientation Landscape Lock</string>
+                <key>key</key>
+                <string>landscapeLock</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <false/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ Make Clean</string>
+                <key>key</key>
+                <string>makeSBClean</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <false/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            <dict>
+                <key>label</key>
+                <string>✯ Status Bar</string>
+                <key>cell</key>
+                <string>PSGroupCell</string>
+                <key>footerText</key>
+		        <string>◦ Two-finger at once swipes down from the status bar to screenshot.</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ Swipe To Screenshot</string>
+                <key>key</key>
+                <string>swipeScreenshot</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <true/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+        </array>
+        <key>title</key>
+        <string>More Options</string>
+    </dict>
+</plist>

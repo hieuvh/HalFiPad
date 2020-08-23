@@ -8,9 +8,9 @@
                 <key>cellClass</key>
                 <string>HalFiPadSwitchCell</string>
                 <key>label</key>
-                <string>◦ Auto Hide</string>
+                <string>◦ Grid Switcher</string>
                 <key>key</key>
-                <string>homeBarAutoHide</string>
+                <string>newSwitcher</string>
                 <key>defaults</key>
                 <string>com.hius.HalFiPadPrefs</string>
                 <key>default</key>
@@ -22,138 +22,112 @@
                 <key>cellClass</key>
                 <string>HalFiPadSwitchCell</string>
                 <key>label</key>
-                <string>◦ In-App</string>
+                <string>◦ Picture in Picture</string>
                 <key>key</key>
-                <string>homeBarSB</string>
+                <string>pictureInPicture</string>
                 <key>defaults</key>
                 <string>com.hius.HalFiPadPrefs</string>
                 <key>default</key>
-                <false/>
+                <true/>
                 <key>PostNotification</key>
                 <string>com.hius.HalFiPadPrefs.settingschanged</string>
             </dict>
             <dict>
-                <key>cellClass</key>
-                <string>HalFiPadSwitchCell</string>
                 <key>label</key>
-                <string>◦ On Lockscreen</string>
-                <key>key</key>
-                <string>homeBarLS</string>
-                <key>defaults</key>
-                <string>com.hius.HalFiPadPrefs</string>
-                <key>default</key>
-                <false/>
-                <key>PostNotification</key>
-                <string>com.hius.HalFiPadPrefs.settingschanged</string>
-            </dict>
-            <dict>
-                <key>cellClass</key>
-                <string>HalFiPadSwitchCell</string>
-                <key>label</key>
-                <string>◦ Size Custom</string>
-                <key>key</key>
-                <string>homeBarCustom</string>
-                <key>defaults</key>
-                <string>com.hius.HalFiPadPrefs</string>
-                <key>default</key>
-                <false/>
-                <key>PostNotification</key>
-                <string>com.hius.HalFiPadPrefs.settingschanged</string>
-                <key>id</key>
-                <string>sizeCustomID</string>
-            </dict>
-            <dict>
+                <string>✯ Dock Options</string>
                 <key>cell</key>
                 <string>PSGroupCell</string>
-                <key>label</key>
-                <string>◦ WIDTH:</string>
-                <key>id</key>
-                <string>widthID</string>
             </dict>
             <dict>
-                <key>cell</key>
-                <string>PSSliderCell</string>
-                <key>isSegmented</key>
-                <true/>
-                <key>default</key>
-                <real>134</real>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ iPad Dock</string>
                 <key>key</key>
-                <string>homeBarWidth</string>
-                <key>max</key>
-                <real>350</real>
-                <key>min</key>
-                <integer>10</integer>
-                <key>showValue</key>
-                <true/>
+                <string>ipadDock</string>
                 <key>defaults</key>
                 <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <false/>
                 <key>PostNotification</key>
                 <string>com.hius.HalFiPadPrefs.settingschanged</string>
-                <key>id</key>
-                <string>widthID2</string>
             </dict>
             <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ In-App Dock</string>
+                <key>key</key>
+                <string>inAppDock</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <true/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ Recent Apps</string>
+                <key>key</key>
+                <string>recentApp</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <true/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            <dict>
+                <key>label</key>
+                <string>✯ Application Style</string>
                 <key>cell</key>
                 <string>PSGroupCell</string>
+                <key>footerText</key>
+                <string>⚠ Some apps require Split View/Slide Over or Only effective with iPad style.</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
                 <key>label</key>
-                <string>◦ HEIGHT:</string>
-                <key>id</key>
-                <string>heightID</string>
+                <string>◦ Split View/SlideOver</string>
+                <key>key</key>
+                <string>iPadMultitask</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <false/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
             </dict>
             <dict>
                 <key>cell</key>
-                <string>PSSliderCell</string>
-                <key>isSegmented</key>
-                <true/>
+                <string>PSSegmentCell</string>
                 <key>default</key>
-                <integer>5</integer>
-                <key>key</key>
-                <string>homeBarHeight</string>
-                <key>max</key>
-                <integer>20</integer>
-                <key>min</key>
                 <integer>1</integer>
-                <key>showValue</key>
-                <true/>
                 <key>defaults</key>
                 <string>com.hius.HalFiPadPrefs</string>
-                <key>PostNotification</key>
-                <string>com.hius.HalFiPadPrefs.settingschanged</string>
-                <key>id</key>
-                <string>heightID2</string>
-            </dict>
-            <dict>
-                <key>cell</key>
-                <string>PSGroupCell</string>
-                <key>label</key>
-                <string>◦ Radius:</string>
-                <key>id</key>
-                <string>radiusID</string>
-            </dict>
-            <dict>
-                <key>cell</key>
-                <string>PSSliderCell</string>
-                <key>isSegmented</key>
-                <true/>
-                <key>default</key>
-                <integer>3</integer>
                 <key>key</key>
-                <string>homeBarRadius</string>
-                <key>max</key>
-                <integer>10</integer>
-                <key>min</key>
-                <integer>1</integer>
-                <key>showValue</key>
-                <true/>
-                <key>defaults</key>
-                <string>com.hius.HalFiPadPrefs</string>
+                <string>screenMode</string>
+                <key>detail</key>
+                <string>PSListItemsController</string>
+                <key>validValues</key>
+                <array>
+                    <integer>0</integer>
+                    <integer>1</integer>
+                </array>
+                <key>validTitles</key>
+                <array>
+                    <string>◦ iPad</string>
+                    <string>◦ Normal</string>
+                </array>
                 <key>PostNotification</key>
                 <string>com.hius.HalFiPadPrefs.settingschanged</string>
-                <key>id</key>
-                <string>radiusID2</string>
             </dict>
         </array>
         <key>title</key>
-        <string>Home Bar</string>
+        <string>iPad Features</string>
     </dict>
 </plist>

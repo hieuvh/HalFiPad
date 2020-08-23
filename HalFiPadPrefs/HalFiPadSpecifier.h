@@ -1,5 +1,4 @@
-#import <Preferences/PSListController.h>
-#import <Preferences/PSSpecifier.h>
+#import "HeaderListPrefs.h"
 #import "OrderedDictionary.h"
 
 @interface PSListController (WelcomeDisplay)
@@ -15,15 +14,12 @@
 
 @interface HalFiPadRootListController : PSListController
 @property (nonatomic, retain) NSMutableDictionary *savedSpecifiers;
-@property (nonatomic, retain) UIBarButtonItem *respringButton;
+@property(nonatomic, retain)UISwitch* enableSwitch;
 @end
 
 @interface HalFiPadAppCustomizationController : PSListController
 @property (nonatomic, strong) NSString *displayName;
 @property (nonatomic, strong) NSString *bundleIdentifier;
-@end
-
-@interface HalFiPadListControler : PSListController
 @end
 
 @interface OBButtonTray : UIView
@@ -41,3 +37,5 @@
 - (id)initWithTitle:(id)arg1 detailText:(id)arg2 icon:(id)arg3;
 - (void)addBulletedListItemWithTitle:(id)arg1 description:(id)arg2 image:(id)arg3;
 @end
+
+OBWelcomeController *welcomeController;

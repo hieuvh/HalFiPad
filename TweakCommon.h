@@ -19,11 +19,13 @@ typedef struct SBIconCoordinate {
 @property (nonatomic, retain) UIControl *cameraButton;
 @end
 
-NSInteger statusBarMode, gesturesMode, screenMode;
 NSInteger screenRound, appDockRound, bottomInset;
 NSInteger HomeBarWidth, HomeBarHeight, HomeBarRadius;
 static NSInteger KeyboardHeight = 48, KeyboardBound = -15;
 
+short statusBarMode, gesturesMode, screenMode, batteryColorMode;
+
+BOOL enabled;
 //iPad features
 BOOL isiPadDock, isInAppDock, isRecentApp;
 BOOL isiPadMultitask, isPIP, isNewGridSwitcher;
@@ -34,8 +36,8 @@ BOOL isCCStatusbar, isCCGrabber, isCCAnimation, isNoBreadcrumb;
 BOOL isiPXCombination, isReachability, isLSShortcuts, isPadLock;
 
 //Battery Percent - BP
-BOOL isBatteryPercent, isDynamicColor, isStaticColor;
-BOOL isStockPercentCharging, isHideChargingIndicator, isHideStockPercent;
+BOOL isBatteryPercent, isPercentChargingCC;
+BOOL isHideChargingIndicator, isHideStockPercent;
 
 //Keyboard options
 BOOL isHigherKeyboard, isDarkKeyboard, isNonLatinKeyboard;
@@ -66,12 +68,14 @@ static void updatePrefs() {
     }
     NSDictionary const *prefs = [[NSMutableDictionary alloc] initWithContentsOfFile:@"/var/mobile/Library/Preferences/com.hius.HalFiPadPrefs.plist"];
     if (prefs) {
+        enabled = boolValueForKey(@"Enabled");
+        batteryColorMode = intValueForKey(@"batteryColorMode");
         gesturesMode = intValueForKey(@"gesturesMode");
         statusBarMode = intValueForKey(@"statusBarMode");
+        screenMode = intValueForKey(@"screenMode");
         screenRound = intValueForKey(@"screenRound");
         appDockRound = intValueForKey(@"roundAppDock");
         bottomInset = intValueForKey(@"bottomInset");
-        screenMode = intValueForKey(@"screenMode");
         HomeBarWidth = intValueForKey(@"homeBarWidth");
         HomeBarHeight = intValueForKey(@"homeBarHeight");
         HomeBarRadius = intValueForKey(@"homeBarRadius");
@@ -100,11 +104,9 @@ static void updatePrefs() {
         isiPXCombination = boolValueForKey(@"ipxCombination");
         //Battery Customization:
         isBatteryPercent = boolValueForKey(@"batteryPercent");
-        isDynamicColor = boolValueForKey(@"dynamicColorBP");
-        isStaticColor = boolValueForKey(@"staticColorBP");
         isHideChargingIndicator = boolValueForKey(@"hideChargingIndicator");
         isHideStockPercent = boolValueForKey(@"hideStockPercent");
-        isStockPercentCharging = boolValueForKey(@"stockPercentCharging");
+        isPercentChargingCC = boolValueForKey(@"percentChargingCC");
         //Keyboard options:
         isHigherKeyboard = boolValueForKey(@"highKeyboard");
         isDarkKeyboard = boolValueForKey(@"darkKeyboard");

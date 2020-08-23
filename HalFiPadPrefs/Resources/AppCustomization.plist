@@ -6,11 +6,9 @@
 	<array>
 		<dict>
 			<key>label</key>
-			<string>✯ Landscape App Style</string>
+			<string>✯ App Style</string>
 			<key>cell</key>
 			<string>PSGroupCell</string>
-			<key>footerText</key>
-			<string>⚠ Some apps require Split View - Slide Over or Only effective with iPad style.</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -72,7 +70,7 @@
 			<key>cellClass</key>
   			<string>HalFiPadSwitchCell</string>
 			<key>label</key>
-			<string>◦ Dark Keyboard</string>
+			<string>◦ Dark Appearance</string>
 			<key>key</key>
 			<string>darkKeyboard</string>
 			<key>defaults</key>
@@ -86,23 +84,7 @@
 			<key>cellClass</key>
   			<string>HalFiPadSwitchCell</string>
 			<key>label</key>
-			<string>◦ Higher Keyboard</string>
-			<key>key</key>
-			<string>highKeyboard</string>
-			<key>defaults</key>
-			<string>com.hius.HalFiPadPrefs</string>
-			<key>default</key>
-			<true/>
-			<key>PostNotification</key>
-			<string>com.hius.HalFiPadPrefs.settingschanged</string>
-			<key>id</key>
-   			<string>higherKeyboardID</string>
-		</dict>
-		<dict>
-			<key>cellClass</key>
-  			<string>HalFiPadSwitchCell</string>
-			<key>label</key>
-			<string>◦ Non-Latin Keyboard</string>
+			<string>◦ Using Non-Latin Language</string>
 			<key>key</key>
 			<string>nonLatinKeyboard</string>
 			<key>defaults</key>
@@ -113,13 +95,27 @@
 			<string>com.hius.HalFiPadPrefs.settingschanged</string>
 		</dict>
 		<dict>
+			<key>cellClass</key>
+  			<string>HalFiPadSwitchCell</string>
 			<key>label</key>
-			<string>✔ Kill the app to take effect.</string>
+			<string>◦ With Bottom Higher</string>
+			<key>key</key>
+			<string>highKeyboard</string>
+			<key>defaults</key>
+			<string>com.hius.HalFiPadPrefs</string>
+			<key>default</key>
+			<true/>
+			<key>PostNotification</key>
+			<string>com.hius.HalFiPadPrefs.settingschanged</string>
+		</dict>
+		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>✔ Kill App</string>
 		</dict>
 	</array>
 	<key>title</key>
-	<string>App Customize</string>
+	<string>In-App</string>
 </dict>
 </plist>

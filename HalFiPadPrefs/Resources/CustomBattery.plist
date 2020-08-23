@@ -5,59 +5,50 @@
         <key>items</key>
         <array>
             <dict>
+                <key>label</key>
+                <string>✯ Border Color</string>
+                <key>cell</key>
+                <string>PSGroupCell</string>
+            </dict>
+            <dict>
+                <key>cell</key>
+                <string>PSSegmentCell</string>
+                <key>default</key>
+                <integer>0</integer>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>key</key>
+                <string>batteryColorMode</string>
+                <key>detail</key>
+                <string>PSListItemsController</string>
+                <key>validValues</key>
+                <array>
+                    <integer>0</integer>
+                    <integer>1</integer>
+                    <integer>2</integer>
+                </array>
+                <key>validTitles</key>
+                <array>
+                    <string>◦ Default</string>
+                    <string>◦ Dynamic</string>
+                    <string>◦ Static</string>
+                </array>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            <dict>
+                <key>label</key>
+                <string>✯ Charging</string>
                 <key>cell</key>
                 <string>PSGroupCell</string>
                 <key>footerText</key>
-                <string>+ or -
-⚠: * Turn off Battery Percentage in Battery Settings.</string>
+                <string>* Turn off Battery Percentage in Settings/Battery.</string>
             </dict>
             <dict>
                 <key>cellClass</key>
                 <string>HalFiPadSwitchCell</string>
                 <key>label</key>
-                <string>◦ Enable</string>
-                <key>key</key>
-                <string>batteryPercent</string>
-                <key>defaults</key>
-                <string>com.hius.HalFiPadPrefs</string>
-                <key>default</key>
-                <true/>
-                <key>PostNotification</key>
-                <string>com.hius.HalFiPadPrefs.settingschanged</string>
-            </dict>
-            <dict>
-                <key>cellClass</key>
-                <string>HalFiPadSwitchCell</string>
-                <key>label</key>
-                <string>+ Dynamic Color</string>
-                <key>key</key>
-                <string>dynamicColorBP</string>
-                <key>defaults</key>
-                <string>com.hius.HalFiPadPrefs</string>
-                <key>default</key>
-                <false/>
-                <key>PostNotification</key>
-                <string>com.hius.HalFiPadPrefs.settingschanged</string>
-            </dict>
-            <dict>
-                <key>cellClass</key>
-                <string>HalFiPadSwitchCell</string>
-                <key>label</key>
-                <string>- Static Color</string>
-                <key>key</key>
-                <string>staticColorBP</string>
-                <key>defaults</key>
-                <string>com.hius.HalFiPadPrefs</string>
-                <key>default</key>
-                <false/>
-                <key>PostNotification</key>
-                <string>com.hius.HalFiPadPrefs.settingschanged</string>
-            </dict>
-            <dict>
-                <key>cellClass</key>
-                <string>HalFiPadSwitchCell</string>
-                <key>label</key>
-                <string>◦ Hide Charging Indicator</string>
+                <string>◦ Hide Indicator</string>
                 <key>key</key>
                 <string>hideChargingIndicator</string>
                 <key>defaults</key>
@@ -71,9 +62,9 @@
                 <key>cellClass</key>
                 <string>HalFiPadSwitchCell</string>
                 <key>label</key>
-                <string>+ Hide Stock Percentage</string>
+                <string>◦ Only Percentage in CC *</string>
                 <key>key</key>
-                <string>hideStockPercent</string>
+                <string>percentChargingCC</string>
                 <key>defaults</key>
                 <string>com.hius.HalFiPadPrefs</string>
                 <key>default</key>
@@ -82,12 +73,20 @@
                 <string>com.hius.HalFiPadPrefs.settingschanged</string>
             </dict>
             <dict>
+                <key>label</key>
+                <string>✯ Percentage</string>
+                <key>cell</key>
+                <string>PSGroupCell</string>
+                <key>footerText</key>
+                <string>Need turn off the [Only Percentage in CC] before.</string>
+            </dict>
+            <dict>
                 <key>cellClass</key>
                 <string>HalFiPadSwitchCell</string>
                 <key>label</key>
-                <string>- Show in CC When Charging*</string>
+                <string>◦ Hide On Status Bar</string>
                 <key>key</key>
-                <string>stockPercentCharging</string>
+                <string>hideStockPercent</string>
                 <key>defaults</key>
                 <string>com.hius.HalFiPadPrefs</string>
                 <key>default</key>
@@ -97,6 +96,6 @@
             </dict>
         </array>
         <key>title</key>
-        <string>Battery Percentage</string>
+        <string>Battery</string>
     </dict>
 </plist>

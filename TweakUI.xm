@@ -1,6 +1,6 @@
 #import "TweakCommon.h"
 
-//Bottom Inset
+// Bottom Inset
 %hook UIWindow
 - (UIEdgeInsets)safeAreaInsets {
     UIEdgeInsets const x = %orig;
@@ -24,7 +24,7 @@
 }
 %end
 
-//Fix Twitter
+// Fix Twitter
 %group FixTwitter
 %hook TFNNavigationBarOverlayView 
 - (void)setFrame:(CGRect)frame {
@@ -39,7 +39,7 @@
 %end
 %end
 
-//Fix for Tiktok, ViettelPay, Instagram, Twitter
+// Fix for Tiktok, ViettelPay, Instagram, Twitter
 %group FixStatusBarInApp
 %hook UIStatusBarManager
 -(double)statusBarHeight {
@@ -48,7 +48,7 @@
 %end
 %end
 
-//Fix Youtube
+// Fix Youtube
 %group FixYouTube
 %hook UIStatusBarManager
 -(BOOL)isStatusBarHidden {
@@ -70,7 +70,6 @@
 @end
 %hook YTHeaderContentComboView
 - (void)layoutSubviews {
-//-(void)viewDidLoad {
     %orig;
     if (statusBarMode == 3) {
         CGRect headerViewFrame = [[self headerView] frame];
@@ -82,7 +81,7 @@
 %end
 %end
 
-//Dark Keyboard
+// Dark Keyboard
 %group DarkKeyBoard
 %hook UIKBRenderConfig
 - (void)setLightKeyboard:(BOOL)arg1 {
@@ -91,7 +90,7 @@
 %end
 %end
 
-//Default Keyboard
+// Default Keyboard
 %group DefaultKeyboard
 %hook UIKeyboardImpl
 +(UIEdgeInsets)deviceSpecificPaddingForInterfaceOrientation:(long long)arg1 inputMode:(id)arg2 {
@@ -102,7 +101,7 @@
 %end
 %end
 
-//Higher Keyboard X
+// Higher Keyboard X
 %group HigherKeyboard
 %hook UIKeyboardImpl
 +(UIEdgeInsets)deviceSpecificPaddingForInterfaceOrientation:(long long)arg1 inputMode:(id)arg2 {
@@ -120,7 +119,7 @@
 %end
 %end
 
-//Landscape Mode
+// Landscape Mode
 %group iPadAppStyle
 %hook UITraitCollection
 +(id)traitCollectionWithHorizontalSizeClass:(long long)arg1 {
@@ -131,7 +130,7 @@
 %end
 %end
 
-//Picture in Picture
+// Picture in Picture
 %group PictureInPicture
 #define keyy(key) CFEqual(string, CFSTR(key))
 extern "C" Boolean MGGetBoolAnswer(CFStringRef);
@@ -142,7 +141,7 @@ extern "C" Boolean MGGetBoolAnswer(CFStringRef);
 }
 %end
 
-//Camera UI Set
+// Camera UI Set
 %group CameraUISet
 %hook CAMCaptureCapabilities
 -(BOOL)isCTMSupported {
@@ -163,6 +162,7 @@ extern "C" Boolean MGGetBoolAnswer(CFStringRef);
 %end
 %end
 
+// Camera Bottom Inset
 %group CameraBottomSet
 %hook CAMZoomControl
 - (void)setFrame:(CGRect)frame {
@@ -181,50 +181,56 @@ static bool appID(NSString *keyString) {
     return [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:keyString];
 }
 
-//Tweak handle
+// Tweak handle
 %ctor {
     @autoreleasepool {
-        %init;
         updatePrefs();
+
         CFNotificationCenterAddObserver(
             CFNotificationCenterGetDarwinNotifyCenter(), NULL, (CFNotificationCallback)updatePrefs,
             CFSTR("com.hius.HalFiPadPrefs.settingschanged"), NULL, CFNotificationSuspensionBehaviorCoalesce
         );
-        bool const isApp = [[[[NSProcessInfo processInfo] arguments] objectAtIndex:0] containsString:@"/Application"];
-        if (isApp) {
-            if (statusBarMode == 3 || statusBarMode == 2) {
-                if (appID(@"com.ss.iphone.ugc.Ame") || appID(@"com.viettel.viettelpay") || appID(@"com.atebits.Tweetie2") || (statusBarMode == 2 && appID(@"com.burbn.instagram")))
-                    %init(FixStatusBarInApp);
-                else if (appID(@"com.google.ios.youtube"))
-                    %init(FixYouTube);
-                else if (appID(@"com.facebook.Facebook"))
-                    bottomInset += 1;
-                else if (statusBarMode == 3 && appID(@"com.burbn.instagram"))
-                    %init(FixInstagram);
+
+        if (enabled) {
+            bool const isApp = [[[[NSProcessInfo processInfo] arguments] objectAtIndex:0] containsString:@"/Application"];
+            if (isApp) {
+                if (statusBarMode == 3 || statusBarMode == 2) {
+                    if (appID(@"com.ss.iphone.ugc.Ame") || appID(@"com.viettel.viettelpay") || appID(@"com.atebits.Tweetie2") || (statusBarMode == 2 && appID(@"com.burbn.instagram")))
+                        %init(FixStatusBarInApp);
+                    else if (appID(@"com.google.ios.youtube"))
+                        %init(FixYouTube);
+                    else if (appID(@"com.facebook.Facebook"))
+                        bottomInset += 1;
+                    else if (statusBarMode == 3 && appID(@"com.burbn.instagram"))
+                        %init(FixInstagram);
+                }
+
+                if (appID(@"com.atebits.Tweetie2"))
+                    %init(FixTwitter);
+                else if (appID(@"com.apple.camera")) {
+                    %init(CameraUISet);
+                    if (isCameraBottomSet)
+                        %init(CameraBottomSet);
+                }
+
+                if (screenMode == 0) {
+                    if (appID(@"com.apple.weather")) return;
+                    %init(iPadAppStyle);
+                }
             }
 
-            if (appID(@"com.atebits.Tweetie2"))
-                %init(FixTwitter);
-            else if (appID(@"com.apple.camera")) {
-                %init(CameraUISet);
-                if (isCameraBottomSet)
-                    %init(CameraBottomSet);
-            }
+            if (isPIP) %init(PictureInPicture);
 
-            if (screenMode == 0) {
-                if (appID(@"com.apple.weather")) return;
-                %init(iPadAppStyle);
-            }
+            // Keyboard Options
+            if (isDarkKeyboard)
+                %init(DarkKeyBoard);
+
+            if (isHigherKeyboard)
+                %init(HigherKeyboard);
+            else
+                %init(DefaultKeyboard);
+
+            %init;
         }
-
-        if (isPIP) %init(PictureInPicture);
-
-        //Keyboard Options
-        if (isDarkKeyboard)
-            %init(DarkKeyBoard);
-        if (isHigherKeyboard)
-            %init(HigherKeyboard);
-        else
-            %init(DefaultKeyboard);
     }
 }

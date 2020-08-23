@@ -6,7 +6,7 @@
         <array>
             <dict>
                 <key>label</key>
-                <string>◦ Bottom Inset</string>
+                <string>◦ Bottom Inset In-App</string>
                 <key>cell</key>
                 <string>PSGroupCell</string>
             </dict>
@@ -32,7 +32,7 @@
             </dict>
             <dict>
                 <key>label</key>
-                <string>◦ Rounded Dock and App Switcher</string>
+                <string>◦ Rounded Dock / App Switcher</string>
                 <key>cell</key>
                 <string>PSGroupCell</string>
                 <key>footerText</key>
@@ -88,6 +88,6 @@
             </dict>
         </array>
         <key>title</key>
-        <string>Bottom Inset + Rounded Corners</string>
+        <string>Bottom Inset / Rounded Corners</string>
     </dict>
 </plist>

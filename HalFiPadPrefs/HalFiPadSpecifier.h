@@ -15,6 +15,8 @@
 @interface HalFiPadRootListController : PSListController
 @property (nonatomic, retain) NSMutableDictionary *savedSpecifiers;
 @property(nonatomic, retain)UISwitch* enableSwitch;
+@property (nonatomic, retain) UILabel *titleLabel;
+@property (nonatomic, retain) UIImageView *iconView;
 @end
 
 @interface HalFiPadAppCustomizationController : PSListController

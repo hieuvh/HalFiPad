@@ -28,7 +28,7 @@
 	<false/>
 
 	<key>batteryPercent</key>
-	<true/>
+	<false/>
 	<key>batteryColorMode</key>
 	<integer>0</integer>
 	<key>hideChargingIndicator</key>
@@ -54,7 +54,7 @@
 	<key>homeBarLS</key>
 	<false/>
 	<key>homeBarCustom</key>
-	<false/>
+	<true/>
 	<key>homeBarWidth</key>
 	<integer>134</integer>
 	<key>homeBarHeight</key>

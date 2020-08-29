@@ -32,11 +32,17 @@
             </dict>
             <dict>
                 <key>label</key>
-                <string>◦ Rounded Dock / App Switcher</string>
+                <string>▽ Rounded Corners ▽</string>
+                <key>cell</key>
+                <string>PSGroupCell</string>
+            </dict>
+            <dict>
+                <key>label</key>
+                <string>◦ App Switcher / Dock</string>
                 <key>cell</key>
                 <string>PSGroupCell</string>
                 <key>footerText</key>
-                <string>5.0: Disabled</string>
+                <string>5.0: Disable</string>
             </dict>
             <dict>
                 <key>cell</key>
@@ -60,11 +66,11 @@
             </dict>
             <dict>
                 <key>label</key>
-                <string>◦ Rounded Screen Corners</string>
+                <string>◦ Screen Display</string>
                 <key>cell</key>
                 <string>PSGroupCell</string>
                 <key>footerText</key>
-                <string>0.0: Disabled</string>
+                <string>0.0: Disable</string>
             </dict>
             <dict>
                 <key>cell</key>
@@ -88,6 +94,6 @@
             </dict>
         </array>
         <key>title</key>
-        <string>Bottom Inset / Rounded Corners</string>
+        <string>Inset</string>
     </dict>
 </plist>

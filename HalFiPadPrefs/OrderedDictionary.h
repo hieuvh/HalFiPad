@@ -1,4 +1,4 @@
-#import <UIKit/UIKit.h>
+@import UIKit;
 @interface OrderedDictionary : NSMutableDictionary {
 	NSMutableDictionary *dictionary;
 	NSMutableArray *array;

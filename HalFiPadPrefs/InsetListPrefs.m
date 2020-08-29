@@ -1,12 +1,12 @@
 #import "HeaderListPrefs.h"
 
-@interface BottomInsetRoundCornersListPrefs : PSListController
+@interface InsetListPrefs : PSListController
 @end
 
-@implementation BottomInsetRoundCornersListPrefs
+@implementation InsetListPrefs
 - (NSArray *)specifiers {
 	if (_specifiers == nil) {
-		NSMutableArray *testingSpecs = _specifiers = [self loadSpecifiersFromPlistName:@"BottomInsetRoundCorner" target:self];
+		NSMutableArray *testingSpecs = _specifiers = [self loadSpecifiersFromPlistName:@"Inset" target:self];
         _specifiers = testingSpecs;
     }
 	return _specifiers;

@@ -905,6 +905,17 @@ static CGFloat offset = 0;
     %orig([UIColor clearColor]);
 }
 %end
+
+// Folder
+%hook SBFolderBackgroundView
+- (id)initWithFrame:(struct CGRect)arg1{
+  	return NULL;
+}
+%end
+
+%hook SBFolderIconImageView
+ - (void)setBackgroundView : (UIView *)backgroundView {}
+%end
 %end
 
 // Tweak handle

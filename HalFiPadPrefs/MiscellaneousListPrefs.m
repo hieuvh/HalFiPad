@@ -1,12 +1,12 @@
 #import "HeaderListPrefs.h"
 
-@interface MoreOptionsListPrefs : PSListController
+@interface MiscellaneousListPrefs : PSListController
 @end
 
-@implementation MoreOptionsListPrefs
+@implementation MiscellaneousListPrefs
 - (NSArray *)specifiers {
 	if (_specifiers == nil) {
-		NSMutableArray *testingSpecs = _specifiers = [self loadSpecifiersFromPlistName:@"MoreOptions" target:self];
+		NSMutableArray *testingSpecs = _specifiers = [self loadSpecifiersFromPlistName:@"Miscellaneous" target:self];
         _specifiers = testingSpecs;
     }
 	return _specifiers;

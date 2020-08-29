@@ -86,7 +86,7 @@
 		</dict>
 		<dict>
 			<key>label</key>
-			<string>✯ Global Options</string>
+			<string>✯ General Settings</string>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 		</dict>
@@ -108,20 +108,6 @@
 			<key>cellClass</key>
   			<string>HalFiPadSwitchCell</string>
 			<key>label</key>
-			<string>◦ CC Grabber</string>
-			<key>key</key>
-			<string>ccGrabber</string>
-			<key>defaults</key>
-			<string>com.hius.HalFiPadPrefs</string>
-			<key>default</key>
-			<false/>
-			<key>PostNotification</key>
-			<string>com.hius.HalFiPadPrefs.settingschanged</string>
-		</dict>
-		<dict>
-			<key>cellClass</key>
-  			<string>HalFiPadSwitchCell</string>
-			<key>label</key>
 			<string>◦ CC Status Bar</string>
 			<key>key</key>
 			<string>ccStatusBar</string>
@@ -129,34 +115,6 @@
 			<string>com.hius.HalFiPadPrefs</string>
 			<key>default</key>
 			<true/>
-			<key>PostNotification</key>
-			<string>com.hius.HalFiPadPrefs.settingschanged</string>
-		</dict>
-		<dict>
-			<key>cellClass</key>
-  			<string>HalFiPadSwitchCell</string>
-			<key>label</key>
-			<string>◦ Combination Buttons X</string>
-			<key>key</key>
-			<string>ipxCombination</string>
-			<key>defaults</key>
-			<string>com.hius.HalFiPadPrefs</string>
-			<key>default</key>
-			<true/>
-			<key>PostNotification</key>
-			<string>com.hius.HalFiPadPrefs.settingschanged</string>
-		</dict>
-		<dict>
-			<key>cellClass</key>
-			<string>HalFiPadSwitchCell</string>
-			<key>label</key>
-			<string>◦ Edge Protect</string>
-			<key>key</key>
-			<string>edgeProtect</string>
-			<key>defaults</key>
-			<string>com.hius.HalFiPadPrefs</string>
-			<key>default</key>
-			<false/>
 			<key>PostNotification</key>
 			<string>com.hius.HalFiPadPrefs.settingschanged</string>
 		</dict>
@@ -203,6 +161,56 @@
 			<string>com.hius.HalFiPadPrefs.settingschanged</string>
 		</dict>
 		<dict>
+			<key>label</key>
+			<string>✯ Misc Settings</string>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>△ Require modern gestures</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+  			<string>HalFiPadSwitchCell</string>
+			<key>label</key>
+			<string>◦ CC Grabber</string>
+			<key>key</key>
+			<string>ccGrabber</string>
+			<key>defaults</key>
+			<string>com.hius.HalFiPadPrefs</string>
+			<key>default</key>
+			<false/>
+			<key>PostNotification</key>
+			<string>com.hius.HalFiPadPrefs.settingschanged</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+  			<string>HalFiPadSwitchCell</string>
+			<key>label</key>
+			<string>◦ Combination Buttons X</string>
+			<key>key</key>
+			<string>ipxCombination</string>
+			<key>defaults</key>
+			<string>com.hius.HalFiPadPrefs</string>
+			<key>default</key>
+			<true/>
+			<key>PostNotification</key>
+			<string>com.hius.HalFiPadPrefs.settingschanged</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HalFiPadSwitchCell</string>
+			<key>label</key>
+			<string>◦ Edge Protect</string>
+			<key>key</key>
+			<string>edgeProtect</string>
+			<key>defaults</key>
+			<string>com.hius.HalFiPadPrefs</string>
+			<key>default</key>
+			<false/>
+			<key>PostNotification</key>
+			<string>com.hius.HalFiPadPrefs.settingschanged</string>
+		</dict>
+		<dict>
 			<key>cellClass</key>
   			<string>HalFiPadSwitchCell</string>
 			<key>label</key>
@@ -234,17 +242,17 @@
 			<key>cell</key>
 			<string>PSLinkCell</string>
 			<key>label</key>
-			<string>▷ Bottom Inset / Round Corners</string>
+			<string>▷ Home Bar</string>
 			<key>detail</key>
-			<string>BottomInsetRoundCornersListPrefs</string>
+			<string>HomeBarListPrefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
 			<string>PSLinkCell</string>
 			<key>label</key>
-			<string>▷ Home Bar</string>
+			<string>▷ Inset</string>
 			<key>detail</key>
-			<string>HomeBarListPrefs</string>
+			<string>InsetListPrefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -266,9 +274,9 @@
 			<key>cell</key>
 			<string>PSLinkCell</string>
 			<key>label</key>
-			<string>▷ More Options</string>
+			<string>▷ Miscellaneous</string>
 			<key>detail</key>
-			<string>MoreOptionsListPrefs</string>
+			<string>MiscellaneousListPrefs</string>
 		</dict>
 		<dict>
 			<key>cell</key>

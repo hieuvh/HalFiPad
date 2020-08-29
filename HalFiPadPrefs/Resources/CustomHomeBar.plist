@@ -56,7 +56,7 @@
                 <key>defaults</key>
                 <string>com.hius.HalFiPadPrefs</string>
                 <key>default</key>
-                <false/>
+                <true/>
                 <key>PostNotification</key>
                 <string>com.hius.HalFiPadPrefs.settingschanged</string>
                 <key>id</key>

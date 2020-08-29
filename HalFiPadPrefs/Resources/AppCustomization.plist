@@ -62,7 +62,7 @@
 		</dict>
 		<dict>
 			<key>label</key>
-			<string>✯ Keyboard options</string>
+			<string>✯ Keyboard settings</string>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 		</dict>

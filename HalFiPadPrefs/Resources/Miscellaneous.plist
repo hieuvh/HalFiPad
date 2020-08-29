@@ -130,9 +130,9 @@
                 <key>cellClass</key>
                 <string>HalFiPadSwitchCell</string>
                 <key>label</key>
-                <string>◦ No Launch App Animation</string>
+                <string>◦ Force Orientation Landscape Lock</string>
                 <key>key</key>
-                <string>fastOpenApp</string>
+                <string>landscapeLock</string>
                 <key>defaults</key>
                 <string>com.hius.HalFiPadPrefs</string>
                 <key>default</key>
@@ -144,9 +144,9 @@
                 <key>cellClass</key>
                 <string>HalFiPadSwitchCell</string>
                 <key>label</key>
-                <string>◦ Force Orientation Landscape Lock</string>
+                <string>◦ No Launch App Animation</string>
                 <key>key</key>
-                <string>landscapeLock</string>
+                <string>fastOpenApp</string>
                 <key>defaults</key>
                 <string>com.hius.HalFiPadPrefs</string>
                 <key>default</key>
@@ -192,6 +192,6 @@
             </dict>
         </array>
         <key>title</key>
-        <string>More Options</string>
+        <string>Miscellaneous</string>
     </dict>
 </plist>

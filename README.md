@@ -1,6 +1,6 @@
 # HalFiPad
 Bring modern gestures and many unique features to your iPhone, but lightweight and less battery drain.<br>
-Add my repo: [cypous.github.io/repo](https://cypous.github.io/repo)
+Add my repo: [cypous.github.io](https://cypous.github.io)
 # Features:
 * iPhone X gestures (include Only Left, Only Right).
 * Miniature(similar iPhone X gestures): Reduce the ability to switch applications quickly when swiping left or right on the bottom edge.

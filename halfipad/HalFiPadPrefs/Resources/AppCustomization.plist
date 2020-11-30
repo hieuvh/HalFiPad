@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>label</key>
+			<string>✯ App Style</string>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSegmentCell</string>
+			<key>default</key>
+			<integer>1</integer>
+			<key>defaults</key>
+			<string>com.hius.HalFiPadPrefs</string>
+			<key>key</key>
+			<string>screenMode</string>
+			<key>detail</key>
+			<string>PSListItemsController</string>
+			<key>validValues</key>
+			<array>
+				<integer>0</integer>
+				<integer>1</integer>
+			</array>
+			<key>validTitles</key>
+			<array>
+				<string>◦ iPad</string>
+				<string>◦ Normal</string>
+			</array>
+			<key>PostNotification</key>
+			<string>com.hius.HalFiPadPrefs.settingschanged</string>
+		</dict>
+		<dict>
+			<key>label</key>
+			<string>✯ Bottom Inset</string>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSliderCell</string>
+			<key>isSegmented</key>
+			<true/>
+			<key>default</key>
+			<real>0</real>
+			<key>max</key>
+			<real>30</real>
+			<key>min</key>
+			<integer>0</integer>
+			<key>showValue</key>
+			<true/>
+			<key>defaults</key>
+			<string>com.hius.HalFiPadPrefs</string>
+			<key>key</key>
+			<string>bottomInset</string>
+			<key>PostNotification</key>
+			<string>com.hius.HalFiPadPrefs.settingschanged</string>
+		</dict>
+		<dict>
+			<key>label</key>
+			<string>✯ Keyboard settings</string>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+  			<string>HalFiPadSwitchCell</string>
+			<key>label</key>
+			<string>◦ Dark Appearance</string>
+			<key>key</key>
+			<string>darkKeyboard</string>
+			<key>defaults</key>
+			<string>com.hius.HalFiPadPrefs</string>
+			<key>default</key>
+			<false/>
+			<key>PostNotification</key>
+			<string>com.hius.HalFiPadPrefs.settingschanged</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+  			<string>HalFiPadSwitchCell</string>
+			<key>label</key>
+			<string>◦ Using Non-Latin Language</string>
+			<key>key</key>
+			<string>nonLatinKeyboard</string>
+			<key>defaults</key>
+			<string>com.hius.HalFiPadPrefs</string>
+			<key>default</key>
+			<false/>
+			<key>PostNotification</key>
+			<string>com.hius.HalFiPadPrefs.settingschanged</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+  			<string>HalFiPadSwitchCell</string>
+			<key>label</key>
+			<string>◦ With Bottom Higher</string>
+			<key>key</key>
+			<string>highKeyboard</string>
+			<key>defaults</key>
+			<string>com.hius.HalFiPadPrefs</string>
+			<key>default</key>
+			<true/>
+			<key>PostNotification</key>
+			<string>com.hius.HalFiPadPrefs.settingschanged</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>✔ Kill App</string>
+		</dict>
+	</array>
+	<key>title</key>
+	<string>In-App</string>
+</dict>
+</plist>

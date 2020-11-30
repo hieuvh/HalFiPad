@@ -1,0 +1,13 @@
+Package: com.hius.halfipad
+Name: HalFiPad
+Depends: mobilesubstrate, preferenceloader
+Version: 3.8.2
+Architecture: iphoneos-arm
+Description: Modern gestures, iPad features, and many unique features but lightweight and less battery drain.
+Maintainer: Hius
+Author: Hius
+Section: Tweaks
+Replaces: com.binksalex.fluidify, com.VitaTaf.HomeGesture, com.ioscreatix.littlex, com.ryannair05.little11, com.hius.halfipadvn
+Icon: https://raw.githubusercontent.com/v-hius/HalFiPad/master/HalFiPadPrefs/Resources/icon%402x.png
+Depiction: https://cypous.github.io/depictions/web/?p=com.hius.halfipad
+SileoDepiction: https://cypous.github.io/depictions/native/com.hius.halfipad/depiction.json

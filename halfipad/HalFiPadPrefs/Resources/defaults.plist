@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Enabled</key>
+	<true/>
+
+	<key>gesturesMode</key>
+	<integer>1</integer>
+
+	<key>statusBarMode</key>
+	<integer>4</integer>
+
+	<key>ipadDock</key>
+	<false/>
+	<key>inAppDock</key>
+	<true/>
+	<key>recentApp</key>
+	<true/>
+
+	<key>iPadMultitask</key>
+	<false/>
+	<key>screenMode</key>
+	<integer>1</integer>
+	<key>pictureInPicture</key>
+	<false/>
+	<key>newSwitcher</key>
+	<false/>
+
+	<key>batteryPercent</key>
+	<false/>
+	<key>batteryColorMode</key>
+	<integer>0</integer>
+	<key>hideChargingIndicator</key>
+	<false/>
+	<key>hideStockPercent</key>
+	<false/>
+	<key>percentChargingCC</key>
+	<true/>
+
+	<key>ccAnimation</key>
+	<true/>
+	<key>ccStatusBar</key>
+	<true/>
+	<key>ccGrabber</key>
+	<true/>
+	<key>homeBarAutoHide</key>
+	<false/>
+	<key>edgeProtect</key>
+	<false/>
+
+	<key>homeBarSB</key>
+	<false/>
+	<key>homeBarLS</key>
+	<false/>
+	<key>homeBarCustom</key>
+	<false/>
+	<key>homeBarWidth</key>
+	<integer>134</integer>
+	<key>homeBarHeight</key>
+	<integer>5</integer>
+	<key>homeBarRadius</key>
+	<integer>3</integer>
+
+	<key>lsShortcuts</key>
+	<true/>
+	<key>ipxCombination</key>
+	<true/>
+	<key>noBreadcrumb</key>
+	<true/>
+	<key>noReachability</key>
+	<true/>
+
+	<key>bottomInset</key>
+	<integer>0</integer>
+	<key>screenRound</key>
+	<integer>0</integer>
+	<key>roundAppDock</key>
+	<integer>5</integer>
+
+	<key>nonLatinKeyboard</key>
+	<false/>
+	<key>noSwipeKeyboard</key>
+	<false/>
+	<key>highKeyboard</key>
+	<true/>
+	<key>bottomHeightKB</key>
+	<integer>48</integer>
+	<key>boundKeyboard</key>
+	<integer>-15</integer>
+	<key>darkKeyboard</key>
+	<false/>
+
+	<key>makeSBClean</key>
+	<false/>
+	<key>moreIconDock</key>
+	<false/>
+	<key>noDockBackground</key>
+	<true/>
+	<key>noIconsFly</key>
+	<false/>
+	<key>fastOpenApp</key>
+	<false/>
+
+	<key>cameraBottomSet</key>
+	<false/>
+	<key>cameraUI11</key>
+	<false/>
+	<key>cameraZoomFlip11</key>
+	<true/>
+
+	<key>swipeScreenshot</key>
+	<true/>
+	<key>landscapeLock</key>
+	<false/>
+	<key>reduceRows</key>
+	<false/>
+
+	<key>padLock</key>
+	<true/>
+</dict>
+</plist>

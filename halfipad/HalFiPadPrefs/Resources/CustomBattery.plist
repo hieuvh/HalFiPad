@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>items</key>
+        <array>
+            <dict>
+                <key>label</key>
+                <string>✯ Border Color</string>
+                <key>cell</key>
+                <string>PSGroupCell</string>
+            </dict>
+            <dict>
+                <key>cell</key>
+                <string>PSSegmentCell</string>
+                <key>default</key>
+                <integer>0</integer>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>key</key>
+                <string>batteryColorMode</string>
+                <key>detail</key>
+                <string>PSListItemsController</string>
+                <key>validValues</key>
+                <array>
+                    <integer>0</integer>
+                    <integer>1</integer>
+                    <integer>2</integer>
+                </array>
+                <key>validTitles</key>
+                <array>
+                    <string>◦ Default</string>
+                    <string>◦ Dynamic</string>
+                    <string>◦ Static</string>
+                </array>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            <dict>
+                <key>label</key>
+                <string>✯ Charging</string>
+                <key>cell</key>
+                <string>PSGroupCell</string>
+                <key>footerText</key>
+                <string>* Turn off Battery Percentage in Settings/Battery.</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ Hide Indicator</string>
+                <key>key</key>
+                <string>hideChargingIndicator</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <false/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ Only Percentage in CC *</string>
+                <key>key</key>
+                <string>percentChargingCC</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <true/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            <dict>
+                <key>label</key>
+                <string>✯ Percentage</string>
+                <key>cell</key>
+                <string>PSGroupCell</string>
+                <key>footerText</key>
+                <string>Need turn off the [Only Percentage in CC] before.</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ Hide On Status Bar</string>
+                <key>key</key>
+                <string>hideStockPercent</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <false/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+        </array>
+        <key>title</key>
+        <string>Battery</string>
+    </dict>
+</plist>

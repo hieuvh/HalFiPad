@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>items</key>
+        <array>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ Grid Switcher</string>
+                <key>key</key>
+                <string>newSwitcher</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <false/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ Picture in Picture</string>
+                <key>key</key>
+                <string>pictureInPicture</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <true/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            <dict>
+                <key>label</key>
+                <string>✯ Dock Settings</string>
+                <key>cell</key>
+                <string>PSGroupCell</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ iPad Dock</string>
+                <key>key</key>
+                <string>ipadDock</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <false/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+                <key>id</key>
+                <string>iPadDockID</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ In-App Dock</string>
+                <key>key</key>
+                <string>inAppDock</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <true/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+                <key>id</key>
+                <string>InAppID</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ Recent Apps</string>
+                <key>key</key>
+                <string>recentApp</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <true/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+                <key>id</key>
+                <string>RecentAppID</string>
+            </dict>
+            <dict>
+                <key>label</key>
+                <string>✯ App Style</string>
+                <key>cell</key>
+                <string>PSGroupCell</string>
+                <key>footerText</key>
+                <string>⚠ Some apps require Split View/Slide Over or Only effective with iPad style.</string>
+                <key>id</key>
+                <string>AppID</string>
+            </dict>
+            <dict>
+                <key>cellClass</key>
+                <string>HalFiPadSwitchCell</string>
+                <key>label</key>
+                <string>◦ Split View/SlideOver</string>
+                <key>key</key>
+                <string>iPadMultitask</string>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>default</key>
+                <false/>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+                <key>id</key>
+                <string>SplitViewID</string>
+            </dict>
+            <dict>
+                <key>cell</key>
+                <string>PSSegmentCell</string>
+                <key>default</key>
+                <integer>1</integer>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>key</key>
+                <string>screenMode</string>
+                <key>detail</key>
+                <string>PSListItemsController</string>
+                <key>validValues</key>
+                <array>
+                    <integer>0</integer>
+                    <integer>1</integer>
+                </array>
+                <key>validTitles</key>
+                <array>
+                    <string>◦ iPad</string>
+                    <string>◦ Normal</string>
+                </array>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+        </array>
+        <key>title</key>
+        <string>iPad Features</string>
+    </dict>
+</plist>

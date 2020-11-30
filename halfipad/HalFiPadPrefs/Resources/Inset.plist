@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>items</key>
+        <array>
+            <dict>
+                <key>label</key>
+                <string>◦ App Switcher / Dock Round Corner</string>
+                <key>cell</key>
+                <string>PSGroupCell</string>
+            </dict>
+            <dict>
+                <key>cell</key>
+                <string>PSSliderCell</string>
+                <key>isSegmented</key>
+                <true/>
+                <key>default</key>
+                <real>5</real>
+                <key>max</key>
+                <real>30</real>
+                <key>min</key>
+                <integer>5</integer>
+                <key>showValue</key>
+                <true/>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>key</key>
+                <string>roundAppDock</string>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+
+            <dict>
+                <key>label</key>
+                <string>◦ Bottom Inset In-App</string>
+                <key>cell</key>
+                <string>PSGroupCell</string>
+            </dict>
+            <dict>
+                <key>cell</key>
+                <string>PSSliderCell</string>
+                <key>isSegmented</key>
+                <true/>
+                <key>default</key>
+                <real>0</real>
+                <key>max</key>
+                <real>30</real>
+                <key>min</key>
+                <integer>0</integer>
+                <key>showValue</key>
+                <true/>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>key</key>
+                <string>bottomInset</string>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+            
+            <dict>
+                <key>label</key>
+                <string>◦ Screen Display Round Corner</string>
+                <key>cell</key>
+                <string>PSGroupCell</string>
+                <key>footerText</key>
+                <string>0.0: Disable</string>
+            </dict>
+            <dict>
+                <key>cell</key>
+                <string>PSSliderCell</string>
+                <key>isSegmented</key>
+                <true/>
+                <key>default</key>
+                <real>0</real>
+                <key>max</key>
+                <real>30</real>
+                <key>min</key>
+                <integer>0</integer>
+                <key>showValue</key>
+                <true/>
+                <key>defaults</key>
+                <string>com.hius.HalFiPadPrefs</string>
+                <key>key</key>
+                <string>screenRound</string>
+                <key>PostNotification</key>
+                <string>com.hius.HalFiPadPrefs.settingschanged</string>
+            </dict>
+        </array>
+        <key>title</key>
+        <string>Inset</string>
+    </dict>
+</plist>

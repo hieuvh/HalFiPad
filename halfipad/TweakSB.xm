@@ -932,7 +932,7 @@ static CGFloat offset = 0;
 -(void)layoutSubviews {
     %orig;
     UIView* colorView = MSHookIvar<UIView*>(self, "_colorView");
-    [colorView setFrame:CGRectSetY(colorView.frame, colorView.frame.origin.y + 25)];
+    [colorView setFrame:CGRectSetY(colorView.frame, colorView.frame.origin.y + (offset/2))];
 }
 %end
 
@@ -940,7 +940,7 @@ static CGFloat offset = 0;
 -(void)layoutSubviews {
     %orig;
     UIView* lockView = MSHookIvar<UIView*>(self, "_lockView");
-    [lockView setFrame:CGRectSetY(lockView.frame, lockView.frame.origin.y + 45)];
+    [lockView setFrame:CGRectSetY(lockView.frame, lockView.frame.origin.y + (offset/2))];
 }
 %end
 
